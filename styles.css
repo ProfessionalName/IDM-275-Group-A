@@ -34,3 +34,25 @@
   color:white;
   text-align: center;
 }
+
+#logInBox {
+ position: absolute;
+ z-index: 15;
+ top: 50%;
+ left: 50%;
+ margin: -100px 0 0 -150px;
+ background: grey;
+ text-align: center;
+ padding: 25px;
+}
+
+form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+body {
+  background-image: url(https://www.muralswallpaper.co.uk/app/uploads/grey-ombre-product.jpg);
+}
