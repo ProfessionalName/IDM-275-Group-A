@@ -27,7 +27,8 @@
                             deleteConfirm: "Do you really want to delete it?",
     
                             controller:{
-                                loadData: function(){
+                                loadData: function(filter){
+                                    console.log(jQuery.isEmptyObject(filter));
                                     return $.ajax({
                                             type: "GET",
                                             url: "http://localhost:8080/getQuestions",
