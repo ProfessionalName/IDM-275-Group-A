@@ -37,7 +37,6 @@ function login(){
 		dataType : "text",
 		data : params,
 		success : function(msg){
-		document.getElementById("belowText").innerHTML = msg;
 	},
 		error: function(jgXHR, textStatus,errorThrown){
 		alert("Error: " + textStatus + " " + errorThrown);
@@ -46,7 +45,23 @@ function login(){
 }
 
 function signup(){
+	var name = document.getElementById("username").value;
+	var pass = document.getElementById("password").value;
+	var URL = "http://localhost:8080/signup";	
+	var params = {username: name , password: pass};
 
+	$.ajax({
+		type: 'POST',
+		url: URL,
+		data: params,
+		dataType: "text",
+		success: function(msg){
+		document.getElementById("belowText").innerHTML = msg;
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		alert("Error: " + textStatus + " " + errorThrown);
+		}
+	});
 }
 
 

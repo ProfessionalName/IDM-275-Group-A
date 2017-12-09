@@ -6,6 +6,14 @@ var dbinfo = require('../Passwords/databaseinfo.json');
 
 var con = mysql.createConnection(dbinfo);
 
+var con = mysql.createConnection({
+	connectionLimit : 20,
+	host: 'localhost',
+	user: 'root',
+	password: 'homework5',
+	database: 'english_made_easy'
+});
+
 con.connect(function(err){
 	if (err) {
 		console.log('Error connecting to database');
@@ -21,12 +29,13 @@ class Database extends EventEmitter{
 	};
 
 	login(username,password){
-		var str = "SELECT type FROM users WHERE username=" + con.escape(username)
-		+  "AND password=" + con.escape(password) + ")";
+		var str = "SELECT * FROM users WHERE username=" + con.escape(username)
+		+  " AND password=" + con.escape(password) + ";";
 		var self = this;
+		console.log(str);
 		con.query(str, function(err, rows, fields){
 			if(err){
-				console.log('Error');
+				console.log('Data Error');
 				return 0;
 			}else{
 				if(rows.length>0)
@@ -38,31 +47,18 @@ class Database extends EventEmitter{
 	}
 
 	signup(username, password) {
-		var str = "INSERT INTO users VALUES ('" + con.escape(username) + "','" + con.escape(password) + "')";
-		var self = this;
-		con.query(_query, function(err, rows, fields){
-			if (err){
-				console.log("Error");
-				return 0;
-			}else{
-				self.emit('usertable', rows);
-			}
-		});
-
-	}
-
-	getUserTable(){
-		var str = 'SELECT username, type FROM users order by username';
-		var self = this;
+		var str = "INSERT INTO users (username, password) VALUES (" + con.escape(username) + "," + con.escape(password) + ");";
+		console.log(str);
 		con.query(str, function(err, rows, fields){
-			if(err){
-				console.log('Error');
-				return 0;
+			if (err){
+				console.log("User exists");
 			}else{
-				self.emit('usertable',rows);
+				console.log("User added successfully to the database");
 			}
 		});
-	}
+		
+		}
+
 
 	getQuestions(){
 		var _query = 'Select * from questions';
