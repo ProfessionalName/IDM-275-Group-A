@@ -45,6 +45,25 @@ function login(){
 	});
 }
 
+function word(){
+
+	var URL = "http://localhost:8080/word";
+	var input = document.getElementById("wordText").value;
+	var params = {word: input};
+	$.ajax({
+		type: "POST",
+		url : URL,
+		data : params,
+		dataType : "text",
+		success : function(msg){
+		alert(msg);
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		alert("Error: " + textStatus + " " + errorThrown);
+		}
+	});
+}
+
 function signup(){
 
 }
@@ -57,7 +76,17 @@ function signup(){
 </head>
 
 
+<body>
 
+<!-- Contant -->
+<div id="contant">
+  <div id="logInBox">
+  	<input type="text" id="wordText">
+    <input type="button" value="Word" onclick="word()">
+  </div>
+</div>
+
+</body>
 
 <!-- Nav for links and login/username display-->
 <div id="nav">
