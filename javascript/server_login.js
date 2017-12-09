@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
-var mysql = require('mysql');
-// var database = require('./controllers/database');
-// var db = new database();
+
+var database = require('./database');
+var db = new database.database();
 
 var fs = require('fs');
 var EventEmitter = require('events').EventEmitter;
@@ -11,26 +11,16 @@ var utils = require('util');
 var session = require('client-sessions');
 
 
-var key= fs.readFileSync('../text/sqlKey.txt','utf8');
-
-var con = mysql.createConnection({
-	host: 'localhost', 
-	user: 'root', //set to root of database
-	password: key, 
-	database: 'hw5' //database, change when database is updated
-});
-
-
 //connects to mysql
-con.connect(function(err){
-	if(err){
-		console.log('Connection to database has failed!');
-		console.log(err);
-	}
-	else{
-		console.log('Connection to database has succeeded!');
-	}
-});
+// con.connect(function(err){
+// 	if(err){
+// 		console.log('Connection to database has failed!');
+// 		console.log(err);
+// 	}
+// 	else{
+// 		console.log('Connection to database has succeeded!');
+// 	}
+// });
 
 // utils.inherits(database,EventEmitter);
 
@@ -101,4 +91,22 @@ db.getUserTable();
 });
 
 
-
+app.get('/getQuestions', function(req, res){
+	db.once('questionsTable', function(rows){
+		var allQuestions = [];
+		for (var i=0; i < rows.length; i++){
+			allQuestions.push({
+				"Question": rows[i].question,
+				"Option1": rows[i].option1,
+				"Option2": rows[i].option2,
+				"Option3": rows[i].option3,
+				"Option4": rows[i].option4,
+				"Answer": rows[i].answer,
+				"Level": rows[i].level,
+			});
+		};
+		console.log(allQuestions);
+		res.send(allQuestions);
+	});
+	db.getQuestions();
+});
