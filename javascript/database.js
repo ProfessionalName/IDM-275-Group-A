@@ -45,7 +45,7 @@ class Database extends EventEmitter{
 				console.log("Error");
 				return 0;
 			}else{
-				self.emit('questionsTable', rows);
+				self.emit('usertable', rows);
 			}
 		});
 
