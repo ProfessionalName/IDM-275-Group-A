@@ -6,6 +6,13 @@ var dbinfo = require('../Passwords/databaseinfo.json');
 
 var con = mysql.createConnection(dbinfo);
 
+var con = mysql.createConnection({
+	connectionLimit : 20,
+	host: 'localhost',
+	user: 'root',
+	password: 'homework5',
+	database: 'transcript'
+});
 
 con.connect(function(err){
 	if (err) {

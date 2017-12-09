@@ -45,14 +45,9 @@ app.get('/loginrender', function (req, res){
 
 	var toReturn = fs.readFileSync('../text/login.txt','utf8');
 
-<<<<<<< HEAD
 console.log('Rendering page');
 res.send(toReturn);
-=======
 
-	console.log('Rendering page');
-	res.send(toReturn);
->>>>>>> be983ed9350d2276566c5eb490b873db51215e61
 });
 
 

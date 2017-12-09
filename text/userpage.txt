@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="stylesheet" href="styles.css">
+  <title> English Made Easy </title>
+
+</head>
+
+<body>
+
+<!-- Nav for links and login/username display-->
+<div id="nav">
+  <a href="index.html" id ="leftLink">Home</a>
+  <a href="login.html" id ="rightLink">Login</a>
+</div>
+
+<!-- Contant -->
+<div id="userPage">
+  <div id="wordOfDay">
+    <div id="blockHeader">Word of the Day</div>
+    <div id="display">blah</div>
+  </div>
+
+  <div id="levels">
+    <div id="blockHeader">Levels</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+  </div>
+
+  <div id="scoreBoard">
+    <div id="blockHeader">Score Board</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+    <div id="tab">blah</div>
+  </div>
+</div>
+<!-- Footer -->
+<div id="footer">
+Insert Stuff About Copyright Here
+<div>
+
+</body>
+</html>
