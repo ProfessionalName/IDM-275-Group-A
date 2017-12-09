@@ -10,6 +10,8 @@ var EventEmitter = require('events').EventEmitter;
 var utils = require('util');
 var session = require('client-sessions');
 
+var unirest = require('unirest');
+
 
 app.use(express.static("."));
 app.listen(8080);
@@ -19,12 +21,38 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 
+app.post('/word', function (req, res){
+
+	var word = req.body.word;
+
+
+	unirest.get("https://wordsapiv1.p.mashape.com/words/" + word + "/definitions")
+	.header("X-Mashape-Key", "UWUobvwifNmshNmBfjDq7YBdeg52p1nKgHqjsn5ZA2Z5MnTRl6")
+	.header("X-Mashape-Host", "wordsapiv1.p.mashape.com")
+	.end(function (result) {
+
+	var definitions = result.body.definitions;
+	var firstDefinition = definitions[0].definition;
+
+	res.send(firstDefinition);
+});
+
+});
+
+
+
 app.get('/loginrender', function (req, res){
 
 	var toReturn = fs.readFileSync('../text/login.txt','utf8');
 
+<<<<<<< HEAD
 console.log('Rendering page');
 res.send(toReturn);
+=======
+
+	console.log('Rendering page');
+	res.send(toReturn);
+>>>>>>> be983ed9350d2276566c5eb490b873db51215e61
 });
 
 
@@ -80,8 +108,22 @@ app.get('/getQuestions', function(req, res){
 				"Level": rows[i].level,
 			});
 		};
-		console.log(allQuestions);
 		res.send(allQuestions);
 	});
 	db.getQuestions();
+});
+
+app.post('/addQuestion', function(req, res){
+	var newQuestion = req.body;
+	db.addQuestion(newQuestion);
+});
+
+app.post('/deleteQuestion', function(req, res){
+	var question = req.body;
+	db.deleteQuestion(question);
+});
+
+app.post('/updateQuestion', function(req, res){
+	var question = req.body;
+	db.updateQuestion(question);
 });
