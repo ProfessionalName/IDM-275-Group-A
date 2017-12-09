@@ -3,9 +3,9 @@
 <!-- Contant -->
 <div id="contant">
   <div id="logInBox">
-    <b>Username:</b> <input type="text" name="username"> <p>
-    <b>Password:</b> <input type="text" name="password"> <p>
-    <input type="button" value="Enter"> <input type="button" value="Sign Up">
+    <b>Username:</b> <input type="text" id ="username"> <p>
+    <b>Password:</b> <input type="text" id ="password"> <p>
+    <input type="button" value="Enter" onclick="login()"> <input type="button" value="Sign Up" onclick="signup()">
   </div>
 </div>
 
