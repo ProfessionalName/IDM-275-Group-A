@@ -26,6 +26,29 @@ function contentControl(content){
 
 }
 
+function login(){
+	var name = document.getElementById("username").value;
+	var pass = document.getElementById("password").value;
+	var URL = "http://localhost:8080/login";
+	var params = {username: name , password: pass};
+	$.ajax({
+		type: "POST",
+		url : URL,
+		dataType : "text",
+		data : params,
+		success : function(msg){
+		document.getElementById("belowText").innerHTML = msg;
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		alert("Error: " + textStatus + " " + errorThrown);
+		}
+	});
+}
+
+function signup(){
+
+}
+
 
 </script>
 
@@ -33,7 +56,8 @@ function contentControl(content){
 
 </head>
 
-<body>
+
+
 
 <!-- Nav for links and login/username display-->
 <div id="nav">
