@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="stylesheet" href="styles.css">
+  <title> English Made Easy </title>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+function contentControl(content){
+	URL = content;
+	$.ajax({
+			type: "GET",
+			url : URL,
+			dataType : 'text',
+			success : function(msg){
+				document.getElementById("contant").innerHTML = msg;
+		},
+			error: function(jgXHR, textStatus,errorThrown){
+				alert("Error: " + textStatus + " " + errorThrown);
+			}
+			});
+
+}
+
+function login(){
+	var name = document.getElementById("username").value;
+	var pass = document.getElementById("password").value;
+	var URL = "http://localhost:8080/login";
+	var params = {username: name , password: pass};
+	$.ajax({
+		type: "POST",
+		url : URL,
+		dataType : "text",
+		data : params,
+		success : function(msg){
+		document.getElementById("belowText").innerHTML = msg;
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		alert("Error: " + textStatus + " " + errorThrown);
+		}
+	});
+}
+
+function word(){
+
+	var URL = "http://localhost:8080/word";
+	var input = document.getElementById("wordText").value;
+	var params = {word: input};
+	$.ajax({
+		type: "POST",
+		url : URL,
+		data : params,
+		dataType : "text",
+		success : function(msg){
+		alert(msg);
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		alert("Error: " + textStatus + " " + errorThrown);
+		}
+	});
+}
+
+function signup(){
+
+}
+
+
+</script>
+
+
+
+</head>
+
+
+<body>
+
+<!-- Contant -->
+<div id="contant">
+  <div id="logInBox">
+  	<input type="text" id="wordText">
+    <input type="button" value="Word" onclick="word()">
+  </div>
+</div>
+
+</body>
+
+<!-- Nav for links and login/username display-->
+<div id="nav">
+  <a href="index.html" id ="leftLink">Home</a>
+  <input type="button" name="Login"	onclick="contentControl('http://localhost:8080/loginrender')">
+</div>
+
+<!-- Contant -->
+<div id="contant">
+Home Page
+</div>
+
+<!-- Footer -->
+<div id="footer">
+Insert Stuff About Copyright Here
+<div>
+
+</body>
+</html>

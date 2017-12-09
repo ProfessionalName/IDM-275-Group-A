@@ -1,0 +1,125 @@
+<html>
+        <head>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+                <!-- <script src="https://code.jquery.com/jquery-3.2.1/jquery.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    
+                <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+                <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    
+                <script>
+                    $(function(){
+                        var _previousQuestionID = "";
+                        $("#jsGrid").jsGrid({
+                            height: "60%",
+                            width: "90%",
+                            filtering: true,
+                            inserting:true,
+                            editing: true,
+                            paging: true,
+                            autoload: true,
+                            pageSize: 10,
+                            pageButtonCount: 5,
+    
+                            deleteConfirm: "Do you really want to delete it?",
+    
+                            controller:{
+                                loadData: function(){
+                                    return $.ajax({
+                                            type: "GET",
+                                            url: "http://localhost:8080/getQuestions",
+                                            contentType: "application/json",
+                                            data: "{}"
+                                    });
+                                },
+                                insertItem: function(item){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "http://localhost:8080/addQuestion",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(item),
+                                        success: function(){
+                                            console.log("Question successfully added!!");
+                                        }
+                                    });
+                                },
+                                updateItem: function(item){
+                                    item.previousQuestion = _previousQuestionID;
+                                    console.log(item);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "http://localhost:8080/updateQuestion",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(item),
+                                        success: function(){
+                                            console.log("Question successfully updated!!");
+                                            _previousQuestionID = "";
+                                        }
+                                    });
+                                },
+                                deleteItem: function(item){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "http://localhost:8080/deleteQuestion",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(item),
+                                        success: function(){
+                                            console.log("Question successfully deleted!!");
+                                        }
+                                    });
+                                }
+                            },
+
+                            onItemEditing: function(args){
+                                _previousQuestionID = args.item.Question;
+                                console.log(_previousQuestionID);
+                            },
+    
+                            fields: [
+                                {name: "Question", type: "text", width: 150},
+                                {name: "Option1", type: "text", width: 50},
+                                {name: "Option2", type: "text", width: 50},
+                                {name: "Option3", type: "text", width: 50},
+                                {name: "Option4", type: "text", width: 50},
+                                {name: "Answer", type: "text", width: 50},
+                                {name: "Level", type: "number", width: 50},
+                                {type: "control"}
+                            ]
+    
+                        });
+                    });    
+                </script>
+            
+                <script>
+                    function getQuestions(){
+                        var _url = "http://localhost:8080/getQuestions"
+    
+                    }
+                </script>
+        </head>
+        <body>
+            <div class="bg-dark" style="height:40px" id="topbar">
+                <div class="float-right" style="padding-top:4px">
+                    <div class="btn-group">
+                        <img class="btn dropdown-toggle" src="../assets/images/profile.png" alt="dropdown image" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:30px;width:40px;">
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item">Log Out</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="container bg-light">
+                <div id="hello" style="margin-top:20px">
+                    <h4>Hi...</h4>
+                    <div id="jsGrid">
+                    </div>
+                </div>
+    
+                </div>
+            </div>
+        </body>
+    </html>
