@@ -2,8 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mysql = require('mysql');
-var database = require('./controllers/database');
-var db = new database();
+// var database = require('./controllers/database');
+// var db = new database();
 
 var fs = require('fs');
 var EventEmitter = require('events').EventEmitter;
@@ -31,7 +31,8 @@ con.connect(function(err){
 		console.log('Connection to database has succeeded!');
 	}
 });
-utils.inherits(database,EventEmitter);
+
+// utils.inherits(database,EventEmitter);
 
 
 app.use(express.static("."));
@@ -42,20 +43,23 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 
-app.get('/', function (req, res){
-res.write(`<html>
-<body>
-<form method=post action='/login'>
-Username:<br>
-<input type=text name=username id="u_name">
-Password:<br>
-<input type=password name=password id="u_pass">
-<input type=submit value=Login>
-</form>
-</body>
-</html>`);
-res.send();
+app.get('/loginrender', function (req, res){
+
+	var toReturn = fs.readFileSync('../text/login.txt','utf8');
+
+// res.write(`<html>
+// <body>
+// <form method=post action='/login'>
+// Username:<br>
+// <input type=text name=username id="u_name">
+// Password:<br>
+// <input type=password name=password id="u_pass">
+// <input type=submit value=Login>
+// </form>
+// </body>
+// </html>`);
 console.log('Rendering page');
+res.send(toReturn);
 });
 
 
