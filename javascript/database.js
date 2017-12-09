@@ -63,6 +63,45 @@ class Database extends EventEmitter{
 		});
 	}
 
+	addQuestion(question){
+		var _query = "Insert into questions values('"  + question.Question + "','" + question.Option1 + "','" + question.Option2 + "','" + question.Option3 + "','"
+			 + question.Option4 + "','" +  question.Answer + "'," +  question.Level +  ")";
+		console.log(_query);
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while adding new question to the database!");
+			}else{
+				console.log("Question added successfully to the database");
+			}
+		});
+	}
+
+	deleteQuestion(question){
+		var _query = "Delete from questions where question='" + question.Question + "'";
+		console.log(_query);
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while deleting the question");
+			}else{
+				console.log("Question deleted successfully to the database");
+			}
+		});
+	}
+
+	updateQuestion(question){
+		var _query = "Update questions set question ='" + question.Question + "', option1 ='" + question.Option1 + "', option2 ='" + question.Option2
+			+ "', option3 ='" + question.Option3 + "', option4 ='" + question.Option4 + "', answer ='" + question.Answer + "', level=" + question.Level 
+			+ " where question = '" + question.previousQuestion + "'";
+		console.log(_query);
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while updating the question");
+			}else{
+				console.log("Question updated successfully to the database");
+			}
+		});
+	}
+
 }
 
 exports.database = Database;

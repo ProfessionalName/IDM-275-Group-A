@@ -105,8 +105,22 @@ app.get('/getQuestions', function(req, res){
 				"Level": rows[i].level,
 			});
 		};
-		console.log(allQuestions);
 		res.send(allQuestions);
 	});
 	db.getQuestions();
+});
+
+app.post('/addQuestion', function(req, res){
+	var newQuestion = req.body;
+	db.addQuestion(newQuestion);
+});
+
+app.post('/deleteQuestion', function(req, res){
+	var question = req.body;
+	db.deleteQuestion(question);
+});
+
+app.post('/updateQuestion', function(req, res){
+	var question = req.body;
+	db.updateQuestion(question);
 });
