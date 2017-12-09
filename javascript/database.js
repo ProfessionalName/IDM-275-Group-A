@@ -37,6 +37,20 @@ class Database extends EventEmitter{
 		});
 	}
 
+	signup(username, password) {
+		var str = "INSERT INTO users VALUES ('" + con.escape(username) + "','" + con.escape(password) + "')";
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("Error");
+				return 0;
+			}else{
+				self.emit('questionsTable', rows);
+			}
+		});
+
+	}
+
 	getUserTable(){
 		var str = 'SELECT username, type FROM users order by username';
 		var self = this;
