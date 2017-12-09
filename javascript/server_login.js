@@ -10,6 +10,8 @@ var EventEmitter = require('events').EventEmitter;
 var utils = require('util');
 var session = require('client-sessions');
 
+var unirest = require('unirest');
+
 
 //connects to mysql
 // con.connect(function(err){
@@ -33,23 +35,33 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 
+app.post('/word', function (req, res){
+
+	var word = req.body.word;
+
+
+	unirest.get("https://wordsapiv1.p.mashape.com/words/" + word + "/definitions")
+	.header("X-Mashape-Key", "UWUobvwifNmshNmBfjDq7YBdeg52p1nKgHqjsn5ZA2Z5MnTRl6")
+	.header("X-Mashape-Host", "wordsapiv1.p.mashape.com")
+	.end(function (result) {
+
+	var definitions = result.body.definitions;
+	var firstDefinition = definitions[0].definition;
+
+	res.send(firstDefinition);
+});
+
+});
+
+
+
 app.get('/loginrender', function (req, res){
 
 	var toReturn = fs.readFileSync('../text/login.txt','utf8');
 
-// res.write(`<html>
-// <body>
-// <form method=post action='/login'>
-// Username:<br>
-// <input type=text name=username id="u_name">
-// Password:<br>
-// <input type=password name=password id="u_pass">
-// <input type=submit value=Login>
-// </form>
-// </body>
-// </html>`);
-console.log('Rendering page');
-res.send(toReturn);
+
+	console.log('Rendering page');
+	res.send(toReturn);
 });
 
 
