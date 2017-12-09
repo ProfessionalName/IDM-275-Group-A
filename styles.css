@@ -56,3 +56,124 @@ form {
 body {
   background-image: url(https://www.muralswallpaper.co.uk/app/uploads/grey-ombre-product.jpg);
 }
+
+/* For game */
+
+#contain {
+  position: absolute;
+  background-color: black;
+  width:1000px;
+  height:800px;
+  left: 50%;
+  top: 50%;
+  margin-left: -500px;
+  margin-top: -400px;
+  display: table;
+  border: 3px solid black;
+}
+
+#question {
+  background-color: red;
+  width: 60%;
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+}
+
+#choiceA {
+  background-color: blue;
+  width: 40%;
+  height: 25%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+}
+
+#choiceB {
+  background-color: yellow;
+  width: 40%;
+  height: 25%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+}
+
+#choiceC {
+  background-color: green;
+  width: 40%;
+  height: 25%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+}
+
+#choiceD {
+  background-color: orange;
+  width: 40%;
+  height: 25%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+}
+
+/* For userpage */
+
+#userPage {
+  background-color: black;
+  width: 1904px;
+  height: 800px;
+  left: 50%;
+  top: 50%;
+  margin-top: 30px;
+  text-align:center;
+
+}
+
+#wordOfDay{
+  background-color: red;
+  width: 30%;
+  margin: 20px;
+  float: left;
+  margin-left: 60px;
+}
+
+#levels{
+  background-color: blue;
+  width: 30%;
+  margin: 20px;
+  float: left;
+}
+
+#scoreBoard{
+  background-color: yellow;
+  width: 30%;
+  margin: 20px;
+  float: left;
+}
+
+#blockHeader{
+  background-color: green;
+  font-size: 150%;
+}
+
+#display{
+  margin: 5px;
+  font-size: 125%;
+}
+
+#tab{
+  border: 1px solid black;
+  font-size: 125%;
+  background-color: grey;
+}
