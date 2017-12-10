@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for osx10.12 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: english_made_easy
 -- ------------------------------------------------------
--- Server version	5.7.20
+-- Server version	5.7.20-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -64,7 +64,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES ('What is the meaning of \'intend\'?','have in mind as purpose','consider something','trying new thing','Don\'t really know','have in mind as purpose',1),('Which is the synonym of requisite?','regular','bizarre','necessry','obvious','necessary',5);
+INSERT INTO `questions` VALUES ('What is the antonym of collaborate?','band','participate','conspire','disagree','disagree',1),('What is the antonym of omnipotent?','weak','faint','wasted','tender','weak',4),('What is the antonym of perpetual?','certain','rare','volatile','ceasing','ceasing',5),('What is the antonym of premise?','basis','guess','denial','center','denial',2),('What is the antonym of trivia?','importance','accessory','incidental','detail','importance',3),('What is the meaning of \'intend\'?','have in mind as purpose','consider something','trying new thing','Don\'t really know','have in mind as purpose',1),('What is the meaning of advantage?','money for work performed','benefit resulting from some action','loan agreement','something which encircles','benefit resulting from some action',4),('What is the meaning of amount?','group of same object','combine ','how much there is','riding a horse','how much there is',1),('What is the meaning of constrain?','to permit an action','to close within bounds','to admit','to evade','to close within bounds',2),('What is the meaning of defunct?','remove someone from situation','leave a place or responsibility','having ceased to exist','agree something is good','having ceased to exist',2),('What is the meaning of fallacy?','legally sound',' illegal or immoral action','a  unorthodox opinion','a misleading argument','a misleading argument',5),('What is the meaning of indigenous?','from another country','very old','approaching bad taste','originating where it is found','originating where it is found',4),('What is the meaning of intransigence?','refusing to compromise','power to endure','ability to recover readily','that cannot be overcome','refusing to compromise',5),('What is the meaning of outwit?','obvious clue',' make known clearly','refrain or stay away from','beat through cleverness','beat through cleverness',3),('What is the meaning of reliant?','to dissolve','an existing connection','mutual relation of two things','relying on another for support','relying on another for support',3),('What is the synonym of bias?','leaning','fairness','dislike','justness','leaning',1),('What is the synonym of decree','answer','order','gift','canon','order',1),('What is the synonym of eloquent?','dull','expressive','fast','light','expressive',5),('What is the synonym of hyperbole?','compression','exaggeration','decrease','disinformation','exaggeration',2),('What is the synonym of phobia?','mania','love','fear','hysteria','fear',2),('What is the synonym of pique?','anger','calm','criticize','taunt','anger',3),('What is the synonym of requisite?','regular','bizarre','necessry','obvious','necessary',5),('What is the synonym of rupture?','space','split','rent','closure','split',4),('What is the synonym of violent?','keen','controlled','brutal','sudden','brutal',3),('What is the synonym of xenophobia?','loving','fairness','prejudice','twist','prejudice',4);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-09 19:57:33
+-- Dump completed on 2017-12-09 23:32:37
