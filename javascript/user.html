@@ -26,27 +26,51 @@ function getData(){
         document.getElementById("header-content").innerHTML = "Welcome, " + json.username;
 
         if (level == null){
-            level = 0;
+          document.getElementById("tab2").innerHTML ="";
+          document.getElementById("tab3").innerHTML ="";
+          document.getElementById("tab4").innerHTML ="";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
         }
 
-        if (level > 0){
-          document.getElementById("level1").value = "LEVEL";
+        if (level == 1){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("tab3").innerHTML ="";
+          document.getElementById("tab4").innerHTML ="";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
         }
         
-        if (level > 1){
-          document.getElementById("level2").value = "<b>level 2</b>";
+        if (level == 2){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("tab4").innerHTML ="";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
         }
         
-        if (level > 2){
-          document.getElementById("level3").value = "<b>level 3</b>";
+        if (level == 3){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
         }
         
-        if (level > 3){
-          document.getElementById("level4").value = "<b>level 4</b>";
+        if (level == 4){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("level4").value = "LEVEL 4";
+          document.getElementById("tab6").innerHTML ="";
         }
         
-        if (level > 4){
-          document.getElementById("level5").value = "<b>level 5</b>";
+        if (level == 5){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("level4").value = "LEVEL 4";
+          document.getElementById("level5").value = "LEVEL 5";
         }
     },
       error: function(jgXHR, textStatus,errorThrown){
@@ -116,12 +140,12 @@ window.onload = getData();
 
   <div id="levels">
     <div id="blockHeader">Levels</div>
-    <div class="tab"><input type="button" id="level1" value="level 1"></div>
-    <div class="tab"><input type="button" id="level2" value="level 2"></div>
-    <div class="tab"><input type="button" id="level3" value="level 3"></div>
-    <div class="tab"><input type="button" id="level4" value="level 4"></div>
-    <div class="tab"><input type="button" id="level5" value="level 5"></div>
-    <div class="tab"><input type="button" id="quiz1" value="quiz 1"></div>
+    <div class="tab" id = 'tab1'><input type="button" id="level1" value="level 1"></div>
+    <div class="tab" id = 'tab2'><input type="button" id="level2" value="level 2"></div>
+    <div class="tab" id = 'tab3'><input type="button" id="level3" value="level 3"></div>
+    <div class="tab" id = 'tab4'><input type="button" id="level4" value="level 4"></div>
+    <div class="tab" id = 'tab5'><input type="button" id="level5" value="level 5"></div>
+    <div class="tab" id = 'tab6'><input type="button" id="quiz1" value="quiz 1"></div>
   </div>
 
   <div id="scoreBoard">
