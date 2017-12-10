@@ -53,6 +53,8 @@ function getData(){
       }
   });
   getWord();
+  getScoreboard();
+  getUserScore();
 }
 
 function getWord(){
@@ -71,6 +73,50 @@ function getWord(){
         console.log("Error while getting word of the day!");
       }
   });
+}
+
+function getScoreboard(){
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/getScoreboard",
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        _table = "<table><thead><tr><td>Rank</td><td>User</td><td>Score</td></tr></thead>";
+        _table += "<tbody>";
+        for (var i=0; i < msg.length; i++){
+          _table += "<tr>";
+          _table += "<td>" + msg[i].Rank + "</td>";
+          _table += "<td>" + msg[i].Username + "</td>";
+          _table += "<td>" + msg[i].Score + "</td>";  
+          _table += "</tr>";
+        }
+        _table += "</tbody>";
+        _table += "</table>";
+        var _scoreBoardTable = document.getElementById('scoreBoardTable');
+        _scoreBoardTable.innerHTML = _table;
+
+      },
+      error: function(){
+        console.log("Error while displaying the scoreboard!");
+      }
+  });  
+}
+
+function getUserScore(){
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/getUserScore",
+      contentType: "html",
+      data: "{}",
+      success: function(msg){
+        var _userScore = document.getElementById('userScore');
+        _userScore.innerHTML = "Your current score: " + msg;
+      },
+      error: function(){
+        console.log("Error while getting user score!");
+      }
+  }); 
 }
 
 window.onload = getData();
@@ -109,16 +155,10 @@ window.onload = getData();
 
   <div id="scoreBoard">
     <div id="blockHeader">Score Board</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
+    <div id="scoreBoardTable">
+    </div>
+    <div id="userScore">
+    </div>
   </div>
 </div>
 <!-- Footer -->

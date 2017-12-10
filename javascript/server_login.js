@@ -149,3 +149,28 @@ app.get('/getWord', function(req, res){
 	})
 	db.getRandomWord();
 });
+
+app.get('/getScoreboard', function(req, res){
+	db.once('gotScores', function(rows){
+		var maxSize = 0;
+		if (rows.length <= 5){
+			maxSize = rows.length;
+		}else{
+			maxSize = 5;
+		}
+		var topFiveScore = [];
+		for (var i = 0; i < maxSize; i++){
+			topFiveScore.push({
+				"Rank": i+1,
+				"Username": rows[i].username,
+				"Score": rows[i].total_score
+			});
+		}
+		res.send(topFiveScore);
+	});
+	db.getTopFiveScores()
+});
+
+app.get('/getUserScore', function(req, res){
+	var _user = req.query.user;
+});

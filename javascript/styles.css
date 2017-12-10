@@ -149,6 +149,10 @@ body {
   height: 150px;
 }
 
+#scoreBoard{
+  height:250px;
+}
+
 #levels{
   background-color: blue;
   width: 30%;

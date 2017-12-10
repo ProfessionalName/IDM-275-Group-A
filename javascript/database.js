@@ -139,6 +139,19 @@ class Database extends EventEmitter{
 		});
 	}
 
+	getTopFiveScores(){
+		var _query = "Select * from scoreboard order by total_score desc";
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while fetching score");
+			}else{
+				self.emit('gotScores', rows);
+			}
+		});
+	}
+
 }
 
 exports.database = Database;
