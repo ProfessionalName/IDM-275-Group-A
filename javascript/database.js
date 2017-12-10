@@ -20,7 +20,7 @@ class Database extends EventEmitter{
 		super();
 	};
 
-	login(username,password){
+	login(username,password,req){
 		var str = "SELECT * FROM users WHERE username=" + con.escape(username)
 		+  " AND password=" + con.escape(password) + ";";
 		var self = this;
@@ -30,10 +30,13 @@ class Database extends EventEmitter{
 				console.log('Data Error');
 				return 0;
 			}else{
-				if(rows.length>0)
+				if(rows.length>0){
+					req.session.level = rows[0].level;
 					self.emit('loggedin',1);
-				else
+				}
+				else{
 					self.emit('loggedin',0);
+				}
 			}
 		});
 	}

@@ -173,7 +173,7 @@ body {
   font-size: 125%;
 }
 
-#tab{
+.tab{
   border: 1px solid black;
   font-size: 125%;
   background-color: grey;
