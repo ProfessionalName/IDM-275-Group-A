@@ -22,6 +22,7 @@ function getData(){
       success : function(msg){
         var json = msg;
         var level = json.level
+        document.getElementById("header-content").value = json.username;
         document.getElementById("header-content").innerHTML = "Welcome, " + json.username;
 
         if (level == null){
@@ -29,23 +30,23 @@ function getData(){
         }
 
         if (level > 0){
-          document.getElementById("level1").innerHTML = "<b>level 1</b>";
+          document.getElementById("level1").value = "LEVEL";
         }
         
         if (level > 1){
-          document.getElementById("level2").innerHTML = "<b>level 2</b>";
+          document.getElementById("level2").value = "<b>level 2</b>";
         }
         
         if (level > 2){
-          document.getElementById("level3").innerHTML = "<b>level 3</b>";
+          document.getElementById("level3").value = "<b>level 3</b>";
         }
         
         if (level > 3){
-          document.getElementById("level4").innerHTML = "<b>level 4</b>";
+          document.getElementById("level4").value = "<b>level 4</b>";
         }
         
         if (level > 4){
-          document.getElementById("level5").innerHTML = "<b>level 5</b>";
+          document.getElementById("level5").value = "<b>level 5</b>";
         }
     },
       error: function(jgXHR, textStatus,errorThrown){
@@ -97,7 +98,7 @@ window.onload = getData();
 </head>
 
 <body>
-<header id="header-content"></header>
+<header id="header-content" value = ''></header>
 
 <!-- Nav for links and login/username display-->
 <div id="nav">
@@ -115,12 +116,12 @@ window.onload = getData();
 
   <div id="levels">
     <div id="blockHeader">Levels</div>
-    <div class="tab" id="level1">level 1</div>
-    <div class="tab" id="level2">level 2</div>
-    <div class="tab" id="level3">level 3</div>
-    <div class="tab" id="level4">level 4</div>
-    <div class="tab" id="level5">level 5</div>
-    <div class="tab" id="quiz1">Quiz 1</div>
+    <div class="tab"><input type="button" id="level1" value="level 1"></div>
+    <div class="tab"><input type="button" id="level2" value="level 2"></div>
+    <div class="tab"><input type="button" id="level3" value="level 3"></div>
+    <div class="tab"><input type="button" id="level4" value="level 4"></div>
+    <div class="tab"><input type="button" id="level5" value="level 5"></div>
+    <div class="tab"><input type="button" id="quiz1" value="quiz 1"></div>
   </div>
 
   <div id="scoreBoard">
