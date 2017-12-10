@@ -15,9 +15,9 @@ var unirest = require('unirest');
 
 app.use(session({
 	cookieName: 'session',
-	secret: 'asdfasdf23423', //we could load all this in from an external file
+	secret: 'asdfasdf23423', 
 	duration: 30 * 60 * 1000,
-	activeDuration: 5 * 60 * 1000, //if timeout, but active, extend timeout by this much
+	activeDuration: 5 * 60 * 1000,
 }));
 
 app.use(express.static("."));
@@ -52,7 +52,8 @@ app.use(bodyParser.json());
 
 app.get('/getData', function (req, res){
 
-	var toReturn = req.session.userid;
+	//{username: name , password: pass};
+	var toReturn = {username: req.session.userid, level: req.session.level};
 
 res.send(toReturn);
 
@@ -95,7 +96,7 @@ app.post('/login', function (req, res){
 		}
 		});
 		
-	db.login(username, password);
+	db.login(username, password, req);
 
 	});
 
