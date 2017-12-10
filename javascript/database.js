@@ -10,8 +10,8 @@ var con = mysql.createConnection({
 	connectionLimit : 20,
 	host: 'localhost',
 	user: 'root',
-	password: 'homework5',
-	database: 'transcript'
+	password: 'sqlroot80',
+	database: 'final'
 });
 
 con.connect(function(err){

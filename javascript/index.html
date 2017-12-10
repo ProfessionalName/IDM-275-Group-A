@@ -37,6 +37,7 @@ function login(){
 		dataType : "text",
 		data : params,
 		success : function(msg){
+		 	window.location.href = "http://localhost:8080/user.html";
 	},
 		error: function(jgXHR, textStatus,errorThrown){
 		alert("Error: " + textStatus + " " + errorThrown);
