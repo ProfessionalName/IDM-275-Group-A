@@ -15,9 +15,9 @@ var unirest = require('unirest');
 
 app.use(session({
 	cookieName: 'session',
-	secret: 'asdfasdf23423', //we could load all this in from an external file
+	secret: 'asdfasdf23423', 
 	duration: 30 * 60 * 1000,
-	activeDuration: 5 * 60 * 1000, //if timeout, but active, extend timeout by this much
+	activeDuration: 5 * 60 * 1000,
 }));
 
 app.use(express.static("."));
@@ -52,7 +52,8 @@ app.use(bodyParser.json());
 
 app.get('/getData', function (req, res){
 
-	var toReturn = req.session.userid;
+	//{username: name , password: pass};
+	var toReturn = {username: req.session.userid, level: req.session.level};
 
 res.send(toReturn);
 
@@ -60,13 +61,24 @@ res.send(toReturn);
 
 app.get('/loginrender', function (req, res){
 
-	var toReturn = fs.readFileSync('../text/login.txt','utf8');
-
+	var toReturn;
+	if (req.session.userid) {
+		toReturn = 'loggedin'
+	} else {
+		toReturn = fs.readFileSync('../text/login.txt','utf8');
+	}
 console.log('Rendering page');
 res.send(toReturn);
 
 });
 
+app.get('/logout', function (req, res){
+
+req.session.reset();
+
+res.send();
+
+});
 
 app.post('/signup', function(req,res){
 
@@ -91,11 +103,11 @@ app.post('/login', function (req, res){
 		}
 		else{
 		req.session.msg = "Invalid login";
-		return res.redirect('/loginrender');
+		res.send('login failed')
 		}
 		});
 		
-	db.login(username, password);
+	db.login(username, password, req);
 
 	});
 
@@ -139,4 +151,12 @@ app.post('/deleteQuestion', function(req, res){
 app.post('/updateQuestion', function(req, res){
 	var question = req.body;
 	db.updateQuestion(question);
+});
+
+app.get('/getWord', function(req, res){
+	db.once('gotWord', function(msg){
+		console.log(msg);
+		res.send(msg);
+	})
+	db.getRandomWord();
 });

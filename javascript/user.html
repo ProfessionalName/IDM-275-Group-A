@@ -14,17 +14,80 @@
 
 function getData(){
   URL = 'http://localhost:8080/getData';
+
   $.ajax({
       type: "GET",
       url : URL,
-      dataType : 'text',
+      dataType : 'json',
       success : function(msg){
-        alert(msg);
+        var json = msg;
+        var level = json.level
+        document.getElementById("header-content").value = json.username;
+        document.getElementById("header-content").innerHTML = "Welcome, " + json.username;
+
+        if (level == null){
+            level = 0;
+        }
+
+        if (level > 0){
+          document.getElementById("level1").value = "LEVEL";
+        }
+        
+        if (level > 1){
+          document.getElementById("level2").value = "<b>level 2</b>";
+        }
+        
+        if (level > 2){
+          document.getElementById("level3").value = "<b>level 3</b>";
+        }
+        
+        if (level > 3){
+          document.getElementById("level4").value = "<b>level 4</b>";
+        }
+        
+        if (level > 4){
+          document.getElementById("level5").value = "<b>level 5</b>";
+        }
     },
       error: function(jgXHR, textStatus,errorThrown){
         alert("Error: " + textStatus + " " + errorThrown);
       }
-      });
+  });
+  getWord();
+}
+
+function logout(){
+  $.ajax({
+      type: "GET",
+      url: 'http://localhost:8080/logout',
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        window.location.href = "http://localhost:8080/";
+      },
+      error: function(){
+        console.log("Error while logging out");
+      }
+  });
+}
+
+
+function getWord(){
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/getWord",
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        var _word = document.getElementById('_word');
+        var _definition = document.getElementById('_definition');
+        _word.innerHTML = msg[0].word;
+        _definition.innerHTML = msg[0].definition;
+      },
+      error: function(){
+        console.log("Error while getting word of the day!");
+      }
+  });
 }
 
 window.onload = getData();
@@ -35,27 +98,30 @@ window.onload = getData();
 </head>
 
 <body>
+<header id="header-content" value = ''></header>
 
 <!-- Nav for links and login/username display-->
 <div id="nav">
   <a href="index.html" id ="leftLink">Home</a>
-  <a href="login.html" id ="rightLink">Login</a>
 </div>
 
 <!-- Contant -->
 <div id="userPage">
   <div id="wordOfDay">
-    <div id="blockHeader">Word of the Day</div>
-    <div id="display">blah</div>
+    <div id="blockHeader">Word/Definition</div>
+    <div id="_word"></div>
+    <div id="_definition">blah</div>
+    <button id="nextWord" onclick="getWord()">Another...</button>
   </div>
 
   <div id="levels">
     <div id="blockHeader">Levels</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
+    <div class="tab"><input type="button" id="level1" value="level 1"></div>
+    <div class="tab"><input type="button" id="level2" value="level 2"></div>
+    <div class="tab"><input type="button" id="level3" value="level 3"></div>
+    <div class="tab"><input type="button" id="level4" value="level 4"></div>
+    <div class="tab"><input type="button" id="level5" value="level 5"></div>
+    <div class="tab"><input type="button" id="quiz1" value="quiz 1"></div>
   </div>
 
   <div id="scoreBoard">
@@ -76,6 +142,10 @@ window.onload = getData();
 <div id="footer">
 Insert Stuff About Copyright Here
 <div>
+
+<div id="nav">
+  <input type="button" name="Logout" onclick="logout()">
+</div>
 
 </body>
 </html>
