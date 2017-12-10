@@ -112,6 +112,18 @@ class Database extends EventEmitter{
 		});
 	}
 
+	storeDefinition(word, definition){
+		var _query = "Insert into definitions values('" + word + "', '" + definition + "')";
+		console.log(_query);
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while adding the definition");
+			}else{
+				
+			}
+		});
+	}
+
 }
 
 exports.database = Database;

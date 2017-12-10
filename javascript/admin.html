@@ -12,10 +12,12 @@
     
                 <script>
                     $(function(){
+                        var _previousQuestionID = "";
                         $("#jsGrid").jsGrid({
                             height: "60%",
                             width: "90%",
-                            filtering: true,
+                            filtering: false,
+                            inserting: true,
                             editing: true,
                             paging: true,
                             autoload: true,
@@ -25,26 +27,65 @@
                             deleteConfirm: "Do you really want to delete it?",
     
                             controller:{
-                                loadData: function(){
-                                    return $.ajax({
+                                loadData: function(filter){
+                                    console.log(jQuery.isEmptyObject(filter));
+                                     return $.ajax({
                                             type: "GET",
                                             url: "http://localhost:8080/getQuestions",
                                             contentType: "application/json",
                                             data: "{}"
+                                            });
+                                },
+                                insertItem: function(item){
+                                    $.ajax({
+                                       type: "POST",
+                                        url: "http://localhost:8080/addQuestion",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(item),
+                                        success: function(){
+                                            console.log("Question successfully added!!");
+                                       }
+                                    });
+                                },
+                                updateItem: function(item){
+                                    tem.previousQuestion = _previousQuestionID;
+                                    console.log(item);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "http://localhost:8080/updateQuestion",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(item),
+                                        success: function(){
+                                            console.log("Question successfully updated!!");
+                                            _previousQuestionID = "";
+                                        }
+                                    });
+                                },
+                                deleteItem: function(item){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "http://localhost:8080/deleteQuestion",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(item),
+                                        success: function(){
+                                            console.log("Question successfully deleted!!");
+                                        }
                                     });
                                 }
                             },
-    
+                                
+                            onItemEditing: function(args){
+                                _previousQuestionID = args.item.Question;
+                                console.log(_previousQuestionID);
+                            },
+                                
                             fields: [
                                 {name: "Question", type: "text", width: 150},
-                                {name: "Option1", type: "text", width: 50},
-                                {name: "Option2", type: "text", width: 50},
                                 {name: "Option3", type: "text", width: 50},
                                 {name: "Option4", type: "text", width: 50},
-                                {name: "Answer", type: "text", width: 50},
-                                {name: "Level", type: "number", width: 50}
-                            ]
-    
+                                {name: "Answer", type: "text", width: 50},                                                                {name: "Level", type: "number", width: 50},
+                                {type: "control"}
+                            ]   
                         });
                     });    
                 </script>
