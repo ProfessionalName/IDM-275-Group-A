@@ -21,7 +21,7 @@ function getData(){
       dataType : 'json',
       success : function(msg){
         var json = msg;
-        var level = json.level
+        var level = json.level;
         document.getElementById("header-content").value = json.username;
         document.getElementById("header-content").innerHTML = "Welcome, " + json.username;
 
@@ -48,14 +48,16 @@ function getData(){
         if (level > 4){
           document.getElementById("level5").value = "<b>level 5</b>";
         }
+
+        getWord();
+        getScoreboard();
+        getUserScore();
     },
       error: function(jgXHR, textStatus,errorThrown){
         alert("Error: " + textStatus + " " + errorThrown);
       }
   });
-  getWord();
-  getScoreboard();
-  getUserScore();
+
 }
 
 function logout(){
@@ -121,12 +123,16 @@ function getScoreboard(){
 }
 
 function getUserScore(){
+  var _username = document.getElementById('header-content').value;
+  console.log(_username);
+  var _url = "http://localhost:8080/getUserScore?user=" + _username;
   $.ajax({
       type: "GET",
-      url: "http://localhost:8080/getUserScore",
+      url: _url,
       contentType: "html",
       data: "{}",
       success: function(msg){
+        console.log(msg);
         var _userScore = document.getElementById('userScore');
         _userScore.innerHTML = "Your current score: " + msg;
       },

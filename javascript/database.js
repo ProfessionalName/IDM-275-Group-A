@@ -152,6 +152,19 @@ class Database extends EventEmitter{
 		});
 	}
 
+	getUserScore(user){
+		var _query = "Select total_score from scoreboard where username ='" + user + "'";
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while getting user score");
+			}else{
+				self.emit('gotUserScore', rows);
+			}
+		})
+	}
+
 }
 
 exports.database = Database;

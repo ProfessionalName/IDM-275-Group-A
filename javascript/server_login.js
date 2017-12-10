@@ -184,4 +184,9 @@ app.get('/getScoreboard', function(req, res){
 
 app.get('/getUserScore', function(req, res){
 	var _user = req.query.user;
+	db.once('gotUserScore', function(score){
+		_userScore = score[0].total_score;
+		res.send(_userScore.toString());
+	})
+	db.getUserScore(_user);
 });

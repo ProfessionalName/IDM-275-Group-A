@@ -149,8 +149,8 @@ body {
   height: 150px;
 }
 
-#scoreBoard{
-  height:250px;
+#scoreBoardTable{
+  height: 70%;
 }
 
 #levels{
@@ -165,6 +165,7 @@ body {
   width: 30%;
   margin: 20px;
   float: left;
+  height:250px;
 }
 
 #blockHeader{
