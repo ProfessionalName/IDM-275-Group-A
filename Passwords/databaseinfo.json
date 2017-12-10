@@ -1,6 +1,6 @@
 {
 	"host": "localhost", 
-	"user": "sb3728", 
-	"password": "sqlpassword", 
-	"database": "english_made_easy" 
+	"user": "root", 
+	"password": "sqlroot80", 
+	"database": "final" 
 }

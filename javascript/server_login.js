@@ -13,6 +13,13 @@ var session = require('client-sessions');
 var unirest = require('unirest');
 
 
+app.use(session({
+	cookieName: 'session',
+	secret: 'asdfasdf23423', //we could load all this in from an external file
+	duration: 30 * 60 * 1000,
+	activeDuration: 5 * 60 * 1000, //if timeout, but active, extend timeout by this much
+}));
+
 app.use(express.static("."));
 app.listen(8080);
 
@@ -43,6 +50,13 @@ size = wordsList.length;
 }());
 
 
+app.get('/getData', function (req, res){
+
+	var toReturn = req.session.userid;
+
+res.send(toReturn);
+
+});
 
 app.get('/loginrender', function (req, res){
 
@@ -71,11 +85,13 @@ app.post('/login', function (req, res){
 	console.log(password);
 	db.once('loggedin', function(msg){
 		if(msg==1){
+		req.session.userid=username;
+		console.log(req.session.userid + "session");
 		return res.redirect('/getUserpage');
 		}
-			else{
+		else{
 		req.session.msg = "Invalid login";
-		return res.redirect('/');
+		return res.redirect('/loginrender');
 		}
 		});
 		
@@ -88,8 +104,7 @@ app.get('/getUserpage', function(req,res){
 	str="User logged in";
 	res.send(str);
 	console.log("logged in");
-	window.alert("user logged in");
-	// what to do if logged in…
+
 	});
 
 app.get('/getQuestions', function(req, res){
