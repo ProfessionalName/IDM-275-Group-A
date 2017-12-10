@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
+	"host": "localhost",
+	"user": "root",
+	"password": "yunaanddawn12", 
+	"database": "english_made_easy"
+}
+=======
 	"host": "localhost", 
 	"user": "sb3728", 
 	"password": "sqlpassword", 
 	"database": "english_made_easy" 
 }
+>>>>>>> 0927a94680f8ac7a119b2dff17e6c5aed5939bed

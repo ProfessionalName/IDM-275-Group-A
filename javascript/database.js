@@ -51,7 +51,7 @@ class Database extends EventEmitter{
 				console.log("User added successfully to the database");
 			}
 		});
-		
+
 		}
 
 
@@ -95,7 +95,7 @@ class Database extends EventEmitter{
 
 	updateQuestion(question){
 		var _query = "Update questions set question ='" + question.Question + "', option1 ='" + question.Option1 + "', option2 ='" + question.Option2
-			+ "', option3 ='" + question.Option3 + "', option4 ='" + question.Option4 + "', answer ='" + question.Answer + "', level=" + question.Level 
+			+ "', option3 ='" + question.Option3 + "', option4 ='" + question.Option4 + "', answer ='" + question.Answer + "', level=" + question.Level
 			+ " where question = '" + question.previousQuestion + "'";
 		console.log(_query);
 		con.query(_query, function(err, rows, fields){
@@ -114,7 +114,7 @@ class Database extends EventEmitter{
 			if (err){
 				console.log("There was an error while adding the definition");
 			}else{
-				
+
 			}
 		});
 	}
