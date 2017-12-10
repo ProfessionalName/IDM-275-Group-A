@@ -14,6 +14,7 @@
 
 function getData(){
   URL = 'http://localhost:8080/getData';
+
   $.ajax({
       type: "GET",
       url : URL,
@@ -24,7 +25,26 @@ function getData(){
       error: function(jgXHR, textStatus,errorThrown){
         alert("Error: " + textStatus + " " + errorThrown);
       }
-      });
+  });
+  getWord();
+}
+
+function getWord(){
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/getWord",
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        var _word = document.getElementById('_word');
+        var _definition = document.getElementById('_definition');
+        _word.innerHTML = msg[0].word;
+        _definition.innerHTML = msg[0].definition;
+      },
+      error: function(){
+        console.log("Error while getting word of the day!");
+      }
+  });
 }
 
 window.onload = getData();
@@ -45,8 +65,10 @@ window.onload = getData();
 <!-- Contant -->
 <div id="userPage">
   <div id="wordOfDay">
-    <div id="blockHeader">Word of the Day</div>
-    <div id="display">blah</div>
+    <div id="blockHeader">Word/Definition</div>
+    <div id="_word"></div>
+    <div id="_definition">blah</div>
+    <button id="nextWord" onclick="getWord()">Another...</button>
   </div>
 
   <div id="levels">

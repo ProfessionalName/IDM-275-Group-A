@@ -140,3 +140,11 @@ app.post('/updateQuestion', function(req, res){
 	var question = req.body;
 	db.updateQuestion(question);
 });
+
+app.get('/getWord', function(req, res){
+	db.once('gotWord', function(msg){
+		console.log(msg);
+		res.send(msg);
+	})
+	db.getRandomWord();
+});

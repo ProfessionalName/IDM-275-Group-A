@@ -116,6 +116,26 @@ class Database extends EventEmitter{
 		});
 	}
 
+	getRandomWord(){
+		var _randomNumber = Math.floor(Math.random() * 47);
+		var _query = "Select * from definitions";
+		console.log(_randomNumber);
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while adding the definition");
+			}else{
+				var word = [];
+				word.push({
+					"word": rows[_randomNumber].word,
+					"definition": rows[_randomNumber].definition
+				});
+				self.emit('gotWord', word);
+			}
+		});
+	}
+
 }
 
 exports.database = Database;

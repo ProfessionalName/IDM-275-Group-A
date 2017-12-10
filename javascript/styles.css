@@ -142,10 +142,11 @@ body {
 }
 
 #wordOfDay{
-  background-color: red;
+  background-color: #697A85;
   width: 30%;
   margin: 20px;
   float: left;
+  height: 150px;
 }
 
 #levels{
@@ -176,4 +177,20 @@ body {
   border: 1px solid black;
   font-size: 125%;
   background-color: grey;
+}
+
+#wordOfDay #_word{
+  margin-top: 4px;
+  font-size: 150%;
+}
+
+#wordOfDay #_definition{
+  margin: 20px 4px 4px auto;
+}
+
+#nextWord{
+  border-style: none;
+  background: transparent;
+  color: blue;
+  font-size: 14px;
 }
