@@ -55,6 +55,22 @@ function getData(){
   getWord();
 }
 
+function logout(){
+  $.ajax({
+      type: "GET",
+      url: 'http://localhost:8080/logout',
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        window.location.href = "http://localhost:8080/";
+      },
+      error: function(){
+        console.log("Error while logging out");
+      }
+  });
+}
+
+
 function getWord(){
   $.ajax({
       type: "GET",
@@ -125,6 +141,10 @@ window.onload = getData();
 <div id="footer">
 Insert Stuff About Copyright Here
 <div>
+
+<div id="nav">
+  <input type="button" name="Logout" onclick="logout()">
+</div>
 
 </body>
 </html>

@@ -72,6 +72,13 @@ res.send(toReturn);
 
 });
 
+app.get('/logout', function (req, res){
+
+req.session.reset();
+
+res.send();
+
+});
 
 app.post('/signup', function(req,res){
 
