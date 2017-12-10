@@ -35,6 +35,7 @@ CREATE TABLE `definitions` (
 
 LOCK TABLES `definitions` WRITE;
 /*!40000 ALTER TABLE `definitions` DISABLE KEYS */;
+INSERT INTO `definitions` VALUES ('abstain','choose not to consume'),('adept','someone who is dazzlingly skilled in any field'),('advantage','benefit resulting from some event or action'),('agreement','the statement (oral or written) of an exchange of promises'),('ambiguous','open to two or more interpretations; or of uncertain nature or significance; or (often) intended to mislead'),('amount','how much there is or how many there are of something that you can quantify'),('anarchy','a state of lawlessness and disorder (usually resulting from a failure of government)'),('applause','a demonstration of approval by clapping the hands together'),('asylum','a shelter from danger or hardship'),('bias','a partiality that prevents objective consideration of an issue or situation'),('chronic','habitual'),('coherence','the state of cohering or sticking together'),('collaborate','work together on a common enterprise of project'),('conjunction','the state of being joined together'),('constrain','to close within bounds, or otherwise limit or deprive of free movement'),('decree','decide with authority'),('defunct','having ceased to exist or live'),('efficacy','capacity or power to produce a desired effect'),('eloquent','expressing yourself readily, clearly, effectively'),('embark','proceed somewhere despite the risk of possible dangers'),('employment','the occupation for which you are paid'),('explicit','precisely and clearly expressed or readily observable; leaving nothing to implication'),('fallacy','a misconception resulting from incorrect reasoning'),('harass','annoy continually or chronically'),('hyperbole','extravagant exaggeration'),('implicit','implied though not directly expressed; inherent in the nature of something'),('indigenous','originating where it is found'),('intransigence','the trait of being intransigent; stubbornly refusing to compromise'),('laudatory','full of or giving praise'),('loll','hang loosely or laxly'),('omnipotent','having unlimited power'),('outwit','beat through cleverness and wit'),('pecuniary','relating to or involving money'),('perpetual','uninterrupted in time and indefinitely long continuing'),('phobia','an anxiety disorder characterized by extreme and irrational fear of simple things or social situations'),('pinnacle','the highest level or degree attainable; the highest stage of development'),('pique','a sudden outburst of anger'),('premise','take something as preexisting and given'),('reliant','relying on another for support'),('rupture','separate or cause to separate abruptly'),('sortie','a military action in which besieged troops burst forth from their position'),('spatial','pertaining to or involving or having the nature of space'),('swindler','a person who swindles you by means of deception or fraud'),('trivia','something of small importance'),('violent','characterized by violence or bloodshed'),('wave','signal with the hands or nod'),('whistle','an inexpensive fipple flute'),('xenophobia','a fear of foreigners or strangers');
 /*!40000 ALTER TABLE `definitions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,6 +64,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
+INSERT INTO `questions` VALUES ('What is the meaning of \'intend\'?','have in mind as purpose','consider something','trying new thing','Don\'t really know','have in mind as purpose',1),('Which is the synonym of requisite?','regular','bizarre','necessry','obvious','necessary',5);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-28 11:17:24
+-- Dump completed on 2017-12-09 19:57:33

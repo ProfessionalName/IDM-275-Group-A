@@ -21,26 +21,26 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 
-// var wordsList = fs.readFileSync('../text/wordslist.txt', 'utf8').toString().split('\n');
-// count = 0;
-// size = wordsList.length;
+var wordsList = fs.readFileSync('../text/wordslist.txt', 'utf8').toString().split('\n');
+count = 0;
+size = wordsList.length;
 
-// (function loop(){
-// 	if (count < size){
-// 		var word = wordsList[count];
-// 		console.log(word);
-// 		unirest.get("https://wordsapiv1.p.mashape.com/words/" + word + "/definitions")
-// 			.header("X-Mashape-Key", "UWUobvwifNmshNmBfjDq7YBdeg52p1nKgHqjsn5ZA2Z5MnTRl6")
-// 			.header("X-Mashape-Host", "wordsapiv1.p.mashape.com")
-// 			.end(function (result){
-// 				var definitions = result.body.definitions;
-// 				var firstDefinition = definitions[0].definition;
-// 				db.storeDefinition(word, firstDefinition);
-// 				count++
-// 				loop();
-// 			});
-// 	}
-// }());
+(function loop(){
+	if (count < size){
+		var word = wordsList[count];
+		console.log(word);
+		unirest.get("https://wordsapiv1.p.mashape.com/words/" + word + "/definitions")
+			.header("X-Mashape-Key", "UWUobvwifNmshNmBfjDq7YBdeg52p1nKgHqjsn5ZA2Z5MnTRl6")
+			.header("X-Mashape-Host", "wordsapiv1.p.mashape.com")
+			.end(function (result){
+				var definitions = result.body.definitions;
+				var firstDefinition = definitions[0].definition;
+				db.storeDefinition(word, firstDefinition);
+				count++
+				loop();
+			});
+	}
+}());
 
 
 
