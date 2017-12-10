@@ -17,7 +17,11 @@ function contentControl(content){
 			url : URL,
 			dataType : 'text',
 			success : function(msg){
-				document.getElementById("contant").innerHTML = msg;
+				if(msg == 'loggedin'){
+					window.location.href = "http://localhost:8080/user.html";
+				}else {
+					document.getElementById("contant").innerHTML = msg;
+				}
 		},
 			error: function(jgXHR, textStatus,errorThrown){
 				alert("Error: " + textStatus + " " + errorThrown);
@@ -37,7 +41,11 @@ function login(){
 		dataType : "text",
 		data : params,
 		success : function(msg){
+			if (msg == 'User logged in'){
 		 	window.location.href = "http://localhost:8080/user.html";
+		 } else {
+		 	alert('Log in Failed')
+		 }
 	},
 		error: function(jgXHR, textStatus,errorThrown){
 		alert("Error: " + textStatus + " " + errorThrown);

@@ -61,13 +61,24 @@ res.send(toReturn);
 
 app.get('/loginrender', function (req, res){
 
-	var toReturn = fs.readFileSync('../text/login.txt','utf8');
-
+	var toReturn;
+	if (req.session.userid) {
+		toReturn = 'loggedin'
+	} else {
+		toReturn = fs.readFileSync('../text/login.txt','utf8');
+	}
 console.log('Rendering page');
 res.send(toReturn);
 
 });
 
+app.get('/logout', function (req, res){
+
+req.session.reset();
+
+res.send();
+
+});
 
 app.post('/signup', function(req,res){
 
@@ -92,7 +103,7 @@ app.post('/login', function (req, res){
 		}
 		else{
 		req.session.msg = "Invalid login";
-		return res.redirect('/loginrender');
+		res.send('login failed')
 		}
 		});
 		
