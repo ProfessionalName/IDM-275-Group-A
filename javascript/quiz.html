@@ -7,6 +7,74 @@
 
 </head>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    var question, word1, word2, word3, word4, answer;
+	var jsonObj= { Question: question, 
+					option1: word1,
+					option2: word2, 
+					option3: word3, 
+					option4: word4, 
+					option5: answer 
+				}; 
+	
+	var correctAnswer;
+	var questionNumber = 1;
+
+function PopulateQuestion(){
+      
+	$.ajax({
+         type: "GET",
+         url: "http://localhost:8080/populateQuestions",
+         contentType: "application/json",
+         data: jsonObj,
+         success: function(msg){
+         	
+			for(i=0; i<questionNumber; i++){
+        	$('#question').text(msg[i].Question);
+        	$('#choiceA').text(msg[i].option1);
+        	$('#choiceB').text(msg[i].option2);
+        	$('#choiceC').text(msg[i].option3);
+        	$('#choiceD').text(msg[i].option4);
+        	$('#answer').text(msg[i].option5);
+        	}
+		},
+		error: function(xhr, ajaxOptions, thrownError){
+			alert('Connection to server failed!');
+		}          
+      });
+}
+
+
+function checkAnswer(elt){
+	document.getElementById("answer").click();
+	var user_choice = elt.innerHTML;
+	if(correctAnswer != user_choice){
+		window.alert("Wrong!");
+	}else {
+		window.alert("Correct! Proceed to the next Question!");
+	}
+}
+
+function getCorrectAnswer(olt){
+	var cor_answer = olt.innerHTML;
+	correctAnswer = cor_answer;
+}
+
+function updateQuestion(){
+	questionNumber++;
+	PopulateQuestion();
+}
+
+//function check
+window.onload=PopulateQuestion();
+
+
+//		  
+	</script>
+
 <body>
 
 <!-- Nav for links and login/username display-->
@@ -15,15 +83,21 @@
   <a href="login.html" id ="rightLink">Login</a>
 </div>
 
-<!-- Contant -->
+<!-- Content -->
 <div id="contain">
-  <div id="question">Question</div>
+  <div id="question"></div>
 
-  <div id="choiceA">Answer</div>
-  <div id="choiceB">Answer</div>
-  <div id="choiceC">Answer</div>
-  <div id="choiceD">Answer</div>
+  <div type="button" onclick= "checkAnswer(this);" id="choiceA"></div>
+  <div type="button" onclick= "checkAnswer(this);" id="choiceB"></div>
+  <div type="button" onclick= "checkAnswer(this);" id="choiceC"></div>
+  <div type="button" onclick= "checkAnswer(this);" id="choiceD"></div>
+  <div id="answer" onclick = "getCorrectAnswer(this);" style="display: none;"></div>
+
 </div>
+
+<button onclick= "updateQuestion()" id= "update" style="float: right;">NEXT!</button>
+
+
 
 <!-- Footer -->
 <div id="footer">

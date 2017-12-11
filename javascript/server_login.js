@@ -140,3 +140,25 @@ app.post('/updateQuestion', function(req, res){
 	var question = req.body;
 	db.updateQuestion(question);
 });
+
+app.get('/populateQuestions', function(req, res){
+	console.log("Connected");
+	db.once('questionsTable', function(rows){
+		var Questions = [];
+		for (var i=0; i < rows.length; i++){
+			Questions.push({
+				Question: rows[i].question,
+				option1: rows[i].option1,
+				option2: rows[i].option2,
+				option3: rows[i].option3,
+				option4: rows[i].option4,
+				option5: rows[i].answer
+			});
+		};
+		
+		res.send(Questions);
+		console.log(Questions);
+	});
+	db.populateQuestions();
+
+})
