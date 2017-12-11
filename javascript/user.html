@@ -14,17 +14,156 @@
 
 function getData(){
   URL = 'http://localhost:8080/getData';
+
   $.ajax({
       type: "GET",
       url : URL,
-      dataType : 'text',
+      dataType : 'json',
       success : function(msg){
-        alert(msg);
+        var json = msg;
+        var level = json.level;
+        document.getElementById("header-content").value = json.username;
+        document.getElementById("header-content").innerHTML = "Welcome, " + json.username;
+
+        if (level == null){
+          document.getElementById("tab2").innerHTML ="";
+          document.getElementById("tab3").innerHTML ="";
+          document.getElementById("tab4").innerHTML ="";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
+        }
+
+        if (level == 1){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("tab3").innerHTML ="";
+          document.getElementById("tab4").innerHTML ="";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
+        }
+        
+        if (level == 2){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("tab4").innerHTML ="";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
+        }
+        
+        if (level == 3){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("tab5").innerHTML ="";
+          document.getElementById("tab6").innerHTML ="";
+        }
+        
+        if (level == 4){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("level4").value = "LEVEL 4";
+          document.getElementById("tab6").innerHTML ="";
+        }
+        
+        if (level == 5){
+          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("level4").value = "LEVEL 4";
+          document.getElementById("level5").value = "LEVEL 5";
+        }
+
+        getWord();
+        getScoreboard();
+        getUserScore();
     },
       error: function(jgXHR, textStatus,errorThrown){
         alert("Error: " + textStatus + " " + errorThrown);
       }
-      });
+  });
+
+}
+
+function logout(){
+  $.ajax({
+      type: "GET",
+      url: 'http://localhost:8080/logout',
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        window.location.href = "http://localhost:8080/";
+      },
+      error: function(){
+        console.log("Error while logging out");
+      }
+  });
+}
+
+
+function getWord(){
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/getWord",
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        var _word = document.getElementById('_word');
+        var _definition = document.getElementById('_definition');
+        _word.innerHTML = msg[0].word;
+        _definition.innerHTML = msg[0].definition;
+      },
+      error: function(){
+        console.log("Error while getting word of the day!");
+      }
+  });
+}
+
+function getScoreboard(){
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/getScoreboard",
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        _table = "<table><thead><tr><td>Rank</td><td>User</td><td>Score</td></tr></thead>";
+        _table += "<tbody>";
+        for (var i=0; i < msg.length; i++){
+          _table += "<tr>";
+          _table += "<td>" + msg[i].Rank + "</td>";
+          _table += "<td>" + msg[i].Username + "</td>";
+          _table += "<td>" + msg[i].Score + "</td>";  
+          _table += "</tr>";
+        }
+        _table += "</tbody>";
+        _table += "</table>";
+        var _scoreBoardTable = document.getElementById('scoreBoardTable');
+        _scoreBoardTable.innerHTML = _table;
+
+      },
+      error: function(){
+        console.log("Error while displaying the scoreboard!");
+      }
+  });  
+}
+
+function getUserScore(){
+  var _username = document.getElementById('header-content').value;
+  console.log(_username);
+  var _url = "http://localhost:8080/getUserScore?user=" + _username;
+  $.ajax({
+      type: "GET",
+      url: _url,
+      contentType: "html",
+      data: "{}",
+      success: function(msg){
+        console.log(msg);
+        var _userScore = document.getElementById('userScore');
+        _userScore.innerHTML = "Your current score: " + msg;
+      },
+      error: function(){
+        console.log("Error while getting user score!");
+      }
+  }); 
 }
 
 window.onload = getData();
@@ -35,47 +174,48 @@ window.onload = getData();
 </head>
 
 <body>
+<header id="header-content" value = ''></header>
 
 <!-- Nav for links and login/username display-->
 <div id="nav">
   <a href="index.html" id ="leftLink">Home</a>
-  <a href="login.html" id ="rightLink">Login</a>
 </div>
 
 <!-- Contant -->
 <div id="userPage">
   <div id="wordOfDay">
-    <div id="blockHeader">Word of the Day</div>
-    <div id="display">blah</div>
+    <div id="blockHeader">Word/Definition</div>
+    <div id="_word"></div>
+    <div id="_definition">blah</div>
+    <button id="nextWord" onclick="getWord()">Another...</button>
   </div>
 
   <div id="levels">
     <div id="blockHeader">Levels</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
+    <div class="tab" id = 'tab1'><input type="button" id="level1" value="level 1"></div>
+    <div class="tab" id = 'tab2'><input type="button" id="level2" value="level 2"></div>
+    <div class="tab" id = 'tab3'><input type="button" id="level3" value="level 3"></div>
+    <div class="tab" id = 'tab4'><input type="button" id="level4" value="level 4"></div>
+    <div class="tab" id = 'tab5'><input type="button" id="level5" value="level 5"></div>
+    <div class="tab" id = 'tab6'><input type="button" id="quiz1" value="quiz 1"></div>
   </div>
 
   <div id="scoreBoard">
     <div id="blockHeader">Score Board</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
-    <div id="tab">blah</div>
+    <div id="scoreBoardTable">
+    </div>
+    <div id="userScore">
+    </div>
   </div>
 </div>
 <!-- Footer -->
 <div id="footer">
 Insert Stuff About Copyright Here
 <div>
+
+<div id="nav">
+  <input type="button" name="Logout" onclick="logout()">
+</div>
 
 </body>
 </html>

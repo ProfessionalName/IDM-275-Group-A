@@ -15,9 +15,9 @@ var unirest = require('unirest');
 
 app.use(session({
 	cookieName: 'session',
-	secret: 'asdfasdf23423', //we could load all this in from an external file
+	secret: 'asdfasdf23423', 
 	duration: 30 * 60 * 1000,
-	activeDuration: 5 * 60 * 1000, //if timeout, but active, extend timeout by this much
+	activeDuration: 5 * 60 * 1000,
 }));
 
 app.use(express.static("."));
@@ -52,7 +52,8 @@ app.use(bodyParser.json());
 
 app.get('/getData', function (req, res){
 
-	var toReturn = req.session.userid;
+	//{username: name , password: pass};
+	var toReturn = {username: req.session.userid, level: req.session.level};
 
 res.send(toReturn);
 
@@ -60,13 +61,24 @@ res.send(toReturn);
 
 app.get('/loginrender', function (req, res){
 
-	var toReturn = fs.readFileSync('../text/login.txt','utf8');
-
+	var toReturn;
+	if (req.session.userid) {
+		toReturn = 'loggedin'
+	} else {
+		toReturn = fs.readFileSync('../text/login.txt','utf8');
+	}
 console.log('Rendering page');
 res.send(toReturn);
 
 });
 
+app.get('/logout', function (req, res){
+
+req.session.reset();
+
+res.send();
+
+});
 
 app.post('/signup', function(req,res){
 
@@ -91,11 +103,11 @@ app.post('/login', function (req, res){
 		}
 		else{
 		req.session.msg = "Invalid login";
-		return res.redirect('/loginrender');
+		res.send('login failed')
 		}
 		});
 		
-	db.login(username, password);
+	db.login(username, password, req);
 
 	});
 
@@ -141,6 +153,7 @@ app.post('/updateQuestion', function(req, res){
 	db.updateQuestion(question);
 });
 
+<<<<<<< HEAD
 app.get('/populateQuestions', function(req, res){
 	console.log("Connected");
 	db.once('questionsTable', function(rows){
@@ -162,3 +175,42 @@ app.get('/populateQuestions', function(req, res){
 	db.populateQuestions();
 
 })
+=======
+app.get('/getWord', function(req, res){
+	db.once('gotWord', function(msg){
+		console.log(msg);
+		res.send(msg);
+	})
+	db.getRandomWord();
+});
+
+app.get('/getScoreboard', function(req, res){
+	db.once('gotScores', function(rows){
+		var maxSize = 0;
+		if (rows.length <= 5){
+			maxSize = rows.length;
+		}else{
+			maxSize = 5;
+		}
+		var topFiveScore = [];
+		for (var i = 0; i < maxSize; i++){
+			topFiveScore.push({
+				"Rank": i+1,
+				"Username": rows[i].username,
+				"Score": rows[i].total_score
+			});
+		}
+		res.send(topFiveScore);
+	});
+	db.getTopFiveScores()
+});
+
+app.get('/getUserScore', function(req, res){
+	var _user = req.query.user;
+	db.once('gotUserScore', function(score){
+		_userScore = score[0].total_score;
+		res.send(_userScore.toString());
+	})
+	db.getUserScore(_user);
+});
+>>>>>>> 72d428c797f948ade7b187ce446ce4f883033925

@@ -26,7 +26,7 @@ class Database extends EventEmitter{
 		super();
 	};
 
-	login(username,password){
+	login(username,password,req){
 		var str = "SELECT * FROM users WHERE username=" + con.escape(username)
 		+  " AND password=" + con.escape(password) + ";";
 		var self = this;
@@ -36,10 +36,13 @@ class Database extends EventEmitter{
 				console.log('Data Error');
 				return 0;
 			}else{
-				if(rows.length>0)
+				if(rows.length>0){
+					req.session.level = rows[0].level;
 					self.emit('loggedin',1);
-				else
+				}
+				else{
 					self.emit('loggedin',0);
+				}
 			}
 		});
 	}
@@ -54,7 +57,7 @@ class Database extends EventEmitter{
 				console.log("User added successfully to the database");
 			}
 		});
-		
+
 		}
 
 
@@ -112,7 +115,7 @@ class Database extends EventEmitter{
 
 	updateQuestion(question){
 		var _query = "Update questions set question ='" + question.Question + "', option1 ='" + question.Option1 + "', option2 ='" + question.Option2
-			+ "', option3 ='" + question.Option3 + "', option4 ='" + question.Option4 + "', answer ='" + question.Answer + "', level=" + question.Level 
+			+ "', option3 ='" + question.Option3 + "', option4 ='" + question.Option4 + "', answer ='" + question.Answer + "', level=" + question.Level
 			+ " where question = '" + question.previousQuestion + "'";
 		console.log(_query);
 		con.query(_query, function(err, rows, fields){
@@ -131,9 +134,55 @@ class Database extends EventEmitter{
 			if (err){
 				console.log("There was an error while adding the definition");
 			}else{
-				
+
 			}
 		});
+	}
+
+	getRandomWord(){
+		var _randomNumber = Math.floor(Math.random() * 47);
+		var _query = "Select * from definitions";
+		console.log(_randomNumber);
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while adding the definition");
+			}else{
+				var word = [];
+				word.push({
+					"word": rows[_randomNumber].word,
+					"definition": rows[_randomNumber].definition
+				});
+				self.emit('gotWord', word);
+			}
+		});
+	}
+
+	getTopFiveScores(){
+		var _query = "Select * from scoreboard order by total_score desc";
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while fetching score");
+			}else{
+				self.emit('gotScores', rows);
+			}
+		});
+	}
+
+	getUserScore(user){
+		var _query = "Select total_score from scoreboard where username ='" + user + "'";
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while getting user score");
+			}else{
+				self.emit('gotUserScore', rows);
+			}
+		})
 	}
 
 }
