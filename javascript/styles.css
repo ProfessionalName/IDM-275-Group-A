@@ -70,12 +70,9 @@ body {
   background-color: black;
   color: white;
   padding: 10px;
-  width: 750px;
-  font-size: 25px;
-  margin-left: 30%;
-  margin-top: 15%;
-  padding-bottom: 30px;
-
+  width: 40%;
+  font-size: 20px;
+  margin: 15% auto;
 }
 
 /* For game */
