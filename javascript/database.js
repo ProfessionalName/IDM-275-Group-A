@@ -5,13 +5,13 @@ var mysql = require('mysql');
 var dbinfo = require('../Passwords/databaseinfo.json');
 
 var con = mysql.createConnection(dbinfo);
-var con = mysql.createConnection({
-	connectionLimit : 20,
-	host: 'localhost',
-	user: 'root',
-	password: 'sqlroot80',
-	database: 'final2'
-});
+// var con = mysql.createConnection({
+// 	connectionLimit : 20,
+// 	host: 'localhost',
+// 	user: 'root',
+// 	password: 'sqlroot80',
+// 	database: 'final2'
+// });
 con.connect(function(err){
 	if (err) {
 		console.log('Error connecting to database');
@@ -87,7 +87,7 @@ class Database extends EventEmitter{
 
 
 	getQuestions(){
-		var _query = 'Select question from questions';
+		var _query = 'Select * from questions';
 		var self = this;
 		con.query(_query, function(err, rows, fields){
 			if (err){
