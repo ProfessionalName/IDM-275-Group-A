@@ -65,7 +65,18 @@ body {
  padding: 0px;
 }
 
+#info {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  width: 750px;
+  font-size: 25px;
+  margin-left: 30%;
+  margin-top: 15%;
+  padding-bottom: 30px;
 
+}
 
 /* For game */
 
