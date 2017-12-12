@@ -9,8 +9,8 @@ var con = mysql.createConnection({
 	connectionLimit : 20,
 	host: 'localhost',
 	user: 'root',
-	password: 'homework5',
-	database: 'english_made_easy'
+	password: 'sqlroot80',
+	database: 'final2'
 });
 con.connect(function(err){
 	if (err) {

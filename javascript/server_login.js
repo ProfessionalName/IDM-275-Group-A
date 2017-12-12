@@ -155,7 +155,7 @@ app.post('/updateQuestion', function(req, res){
 
 
 app.get('/populateQuestions', function(req, res){
-	var level = req.body.levels;
+	var level = req.query.level;
 	console.log(level);
 	console.log("Connected");
 	db.once('questionsTable', function(rows){

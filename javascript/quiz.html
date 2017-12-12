@@ -30,7 +30,7 @@
 function PopulateQuestion(){
 	$.ajax({
          type: "GET",
-         url: "http://localhost:8080/populateQuestions",
+         url: "http://localhost:8080/populateQuestions?level=" + level,
          contentType: "application/json",
          data: jsonObj,
          success: function(msg){
@@ -90,7 +90,6 @@ window.onload=getLevel();
 <!-- Nav for links and login/username display-->
 <div id="nav">
   <a href="index.html" id ="leftLink">Home</a>
-  <a href="login.html" id ="rightLink">Login</a>
 </div>
 
 <!-- Content -->
