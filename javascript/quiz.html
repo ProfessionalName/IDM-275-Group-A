@@ -11,6 +11,7 @@
 
 <script type="text/javascript">
 
+<<<<<<< HEAD
     var question, word1, word2, word3, word4, answer;
 	var jsonObj= { Question: question,
 					option1: word1,
@@ -20,14 +21,32 @@
 					option5: answer
 				};
 
+=======
+
+    var question, word1, word2, word3, word4, answer, level;
+	var jsonObj= { Question: question, 
+					option1: word1,
+					option2: word2, 
+					option3: word3, 
+					option4: word4, 
+					option5: answer,
+					levels: level, 
+				}; 
+	
+>>>>>>> e4d900c781a84fc1c11600a5a4f1c92da5b87aca
 	var correctAnswer;
 	var questionNumber = 1;
 
-function PopulateQuestion(){
 
+
+function PopulateQuestion(){
+<<<<<<< HEAD
+
+=======
+>>>>>>> e4d900c781a84fc1c11600a5a4f1c92da5b87aca
 	$.ajax({
          type: "GET",
-         url: "http://localhost:8080/populateQuestions",
+         url: "http://localhost:8080/populateQuestions?level=" + level,
          contentType: "application/json",
          data: jsonObj,
          success: function(msg){
@@ -68,8 +87,15 @@ function updateQuestion(){
 	PopulateQuestion();
 }
 
+function getLevel(){
+		var level_lev = localStorage.getItem("level");
+		level= level_lev.slice(-1);
+		PopulateQuestion();
+}
+
 //function check
-window.onload=PopulateQuestion();
+//window.onload=PopulateQuestion();
+window.onload=getLevel();
 
 
 //

@@ -155,6 +155,8 @@ app.post('/updateQuestion', function(req, res){
 
 
 app.get('/populateQuestions', function(req, res){
+	var level = req.query.level;
+	console.log(level);
 	console.log("Connected");
 	db.once('questionsTable', function(rows){
 		var Questions = [];
@@ -165,14 +167,14 @@ app.get('/populateQuestions', function(req, res){
 				option2: rows[i].option2,
 				option3: rows[i].option3,
 				option4: rows[i].option4,
-				option5: rows[i].answer
+				option5: rows[i].answer,
 			});
 		};
 
 		res.send(Questions);
 		console.log(Questions);
 	});
-	db.populateQuestions();
+	db.populateQuestions(level);
 
 })
 
@@ -213,3 +215,7 @@ app.get('/getUserScore', function(req, res){
 	})
 	db.getUserScore(_user);
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> e4d900c781a84fc1c11600a5a4f1c92da5b87aca
