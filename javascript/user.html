@@ -26,6 +26,7 @@ function getData(){
         document.getElementById("header-content").innerHTML = "Welcome, " + json.username;
 
         if (level == null){
+          document.getElementById("level1").value = "LEVEL 1";
           document.getElementById("tab2").innerHTML ="";
           document.getElementById("tab3").innerHTML ="";
           document.getElementById("tab4").innerHTML ="";
@@ -34,7 +35,7 @@ function getData(){
         }
 
         if (level == 1){
-          document.getElementById("level1").value = "LEVEL 1";
+          document.getElementById("level2").value = "LEVEL 2";
           document.getElementById("tab3").innerHTML ="";
           document.getElementById("tab4").innerHTML ="";
           document.getElementById("tab5").innerHTML ="";
@@ -42,35 +43,25 @@ function getData(){
         }
 
         if (level == 2){
-          document.getElementById("level1").value = "LEVEL 1";
-          document.getElementById("level2").value = "LEVEL 2";
+          document.getElementById("level3").value = "LEVEL 3";
           document.getElementById("tab4").innerHTML ="";
           document.getElementById("tab5").innerHTML ="";
           document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 3){
-          document.getElementById("level1").value = "LEVEL 1";
-          document.getElementById("level2").value = "LEVEL 2";
-          document.getElementById("level3").value = "LEVEL 3";
+          document.getElementById("level4").value = "LEVEL 4";
           document.getElementById("tab5").innerHTML ="";
           document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 4){
-          document.getElementById("level1").value = "LEVEL 1";
-          document.getElementById("level2").value = "LEVEL 2";
-          document.getElementById("level3").value = "LEVEL 3";
-          document.getElementById("level4").value = "LEVEL 4";
+          document.getElementById("level5").value = "LEVEL 5";
           document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 5){
-          document.getElementById("level1").value = "LEVEL 1";
-          document.getElementById("level2").value = "LEVEL 2";
-          document.getElementById("level3").value = "LEVEL 3";
-          document.getElementById("level4").value = "LEVEL 4";
-          document.getElementById("level5").value = "LEVEL 5";
+          document.getElementById("quiz1").value = "QUIZ 1";
         }
 
         getWord();
@@ -212,7 +203,7 @@ function getLevel(olt){
 </div>
 <!-- Footer -->
 <div id="footer">
-Insert Stuff About Copyright Here
+CS-275 Final
 <div>
 
 <div id="nav">

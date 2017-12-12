@@ -32,6 +32,7 @@ function PopulateQuestion(){
          data: jsonObj,
          success: function(msg){
 
+         	if(questionNumber < 6){
 			for(i=0; i<questionNumber; i++){
         	$('#question').text(msg[i].Question);
         	$('#choiceA').text(msg[i].option1);
@@ -40,6 +41,11 @@ function PopulateQuestion(){
         	$('#choiceD').text(msg[i].option4);
         	$('#answer').text(msg[i].option5);
         	}
+        } else {
+        	checkAdvancment();
+        	resetScore();
+        	window.location.href = "http://localhost:8080/user.html";	
+        }
 		},
 		error: function(xhr, ajaxOptions, thrownError){
 			alert('Connection to server failed!');
@@ -55,6 +61,7 @@ function checkAnswer(elt){
 		window.alert("Wrong!");
 		updateQuestion()
 	}else {
+		updateScore(level, level);
 		window.alert("Correct! Proceed to the next Question!");
 		updateQuestion()
 	}
@@ -76,6 +83,62 @@ function getLevel(){
 		PopulateQuestion();
 }
 
+function updateScore(userScore, currentLevel){
+	var params = {score: userScore , level: currentLevel};
+	$.ajax({
+		type: "POST",
+		url : "http://localhost:8080/updateUserScore",
+		data : params,
+		success : function(msg){
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		alert("Error: " + textStatus + " " + errorThrown);
+		}
+	});
+}
+
+function resetScore(){
+  $.ajax({
+      type: "GET",
+      url: 'http://localhost:8080/resetScore',
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+      },
+      error: function(){
+        console.log("Error while reseting score");
+      }
+  });
+}
+
+function checkAdvancment(){
+	var params = {level: level};
+	$.ajax({
+		type: "POST",
+		url : "http://localhost:8080/advance",
+		data : params,
+		success : function(msg){
+	},
+		error: function(jgXHR, textStatus,errorThrown){
+		}
+	});
+}
+
+function logout(){
+  $.ajax({
+      type: "GET",
+      url: 'http://localhost:8080/logout',
+      contentType: "application/json",
+      data: "{}",
+      success: function(msg){
+        window.location.href = "http://localhost:8080/";
+      },
+      error: function(){
+        console.log("Error while logging out");
+      }
+  });
+}
+
 //function check
 window.onload=getLevel();
 
@@ -87,7 +150,7 @@ window.onload=getLevel();
 
 <!-- Nav for links and login/username display-->
 <div id="nav">
-  <a href="index.html" id ="leftLink">Home</a>
+  <a href="index.html" id ="leftLink" onclick="resetScore()">Home</a>
 </div>
 
 <!-- Content -->
@@ -105,10 +168,13 @@ window.onload=getLevel();
 <button onclick= "updateQuestion()" id= "update" style="float: right;">NEXT!</button>
 
 
+<div id="nav">
+  <input type="button" name="Logout" onclick="logout()" value="Logout">
+</div>
 
 <!-- Footer -->
 <div id="footer">
-Insert Stuff About Copyright Here
+CS-275 Final
 <div>
 
 </body>

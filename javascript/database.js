@@ -58,6 +58,16 @@ class Database extends EventEmitter{
 			}
 		});
 
+		var _iq2 = "INSERT INTO scoreboard (username, total_score, level1_score, level2_socre, level3_score, level4_score, level5_score) VALUES ('" + username + "', 0, 0, 0, 0, 0, 0);"
+		console.log(_iq2);
+		con.query(_iq2, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while inserting initial score (0)");
+			}else{
+				console.log("User added successfully to the scoreboard");
+			}
+		})
+
 		}
 
 
@@ -185,6 +195,138 @@ class Database extends EventEmitter{
 			}
 		})
 	}
+
+	updateScore(user, score, level){
+		var levelString;
+		if (level == 1){
+			levelString = 'level1_score'
+		} else if (level == 2){
+			levelString = 'level2_socre'
+		} else if (level == 3){
+			levelString = 'level3_score'
+		} else if (level == 4){
+			levelString = 'level4_score'
+		} else if (level == 5){
+			levelString = 'level5_score'
+		} else if (level == -1){
+			levelString = 'total_score'
+		}
+		var _query = "Update scoreboard set " + levelString + " = " + score + " where username ='" + user + "'";
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while updating user score");
+			}else{
+				self.emit('updatedUserScore');
+			}
+		})
+
+
+	}
+
+	updateTotalScore(user){
+		var _query = "Select * from scoreboard where username ='" + user + "'";
+		console.log(_query);
+		var self = this;
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while updating total score");
+			}else{
+				console.log(rows);
+				var totalScore = rows[0].total_score; 
+				var level1 = rows[0].level1_score;
+				var level2 = rows[0].level2_socre;
+				var level3 = rows[0].level3_score;
+				var level4 = rows[0].level4_score;
+				var level5 = rows[0].level5_score; 
+
+				var newTotalScore = level1 + level2 + level3 + level4 + level5;
+				if (newTotalScore > totalScore){
+					_query = "Update scoreboard set total_score = " + newTotalScore + " where username ='" + user + "'";
+					console.log(_query);
+					con.query(_query, function(err, rows, fields){
+						if (err){
+							console.log("There was an error while updating total user score");
+						}
+					})
+				}
+
+				self.emit('updatedTotalScore');
+			}
+		})
+	}
+
+
+	advanceLevelCheck(user, score, level){
+		console.log("ADVANCE LEVEL CHECK")
+		var self = this;
+		var levelString;
+		if (level == 1){
+			levelString = 'level1_score'
+		} else if (level == 2){
+			levelString = 'level2_socre'
+		} else if (level == 3){
+			levelString = 'level3_score'
+		} else if (level == 4){
+			levelString = 'level4_score'
+		} else if (level == 5){
+			levelString = 'level5_score'
+		}
+		
+		var _query = "Select " + levelString +" from scoreboard where username ='" + user + "'";
+		console.log(_query);
+
+		var isAdvance = false;
+
+		con.query(_query, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while checking level advancement");
+			}else{
+					if (level == 1){
+						if (rows[0].level1_score > 2){
+							isAdvance = true;
+						} 
+					} else if (level == 2){
+						if (rows[0].level2_socre > 5){
+							isAdvance = true;
+						} 
+					} else if (level == 3){
+						if (rows[0].level3_score > 8){
+							isAdvance = true;
+						} 
+					} else if (level == 4){
+						if (rows[0].level4_score > 11){
+							isAdvance = true;
+						} 
+					} else if (level == 5){
+						if (rows[0].level3_score > 14){
+							isAdvance = true;
+						} 
+					}
+					self.emit('advance', isAdvance);
+			}
+		})
+
+	}
+
+
+	advanceLevel(user, level){
+			// var nextLevel = parseInt(level) + 1;
+			// if (parseInt(level) == 1){
+			// 	nextLevel = 1;
+			// }
+			var _query2 = "Update users set level = " + level + " where username ='" + user + "'";
+			console.log(_query2);
+
+			con.query(_query2, function(err, rows, fields){
+			if (err){
+				console.log("There was an error while advancing level");
+			}
+		})
+	}
+
+
 
 }
 

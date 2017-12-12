@@ -80,6 +80,14 @@ res.send();
 
 });
 
+app.get('/resetScore', function (req, res){
+
+req.session.score = 0;
+
+res.send();
+
+});
+
 app.post('/signup', function(req,res){
 
 	var username = req.body.username;
@@ -215,3 +223,65 @@ app.get('/getUserScore', function(req, res){
 	})
 	db.getUserScore(_user);
 });
+
+app.post('/updateUserScore', function(req, res){
+	var _user = req.session.userid;
+	var _level = req.body.level;
+	console.log("Session1: " + req.session.score);
+	if(typeof req.session.score !== 'undefined'){
+		req.session.score = parseInt(req.session.score) + parseInt(req.body.score);
+		console.log("Session2: " + req.session.score);
+	}else {
+		req.session.score = 0 + parseInt(req.body.score);
+		console.log("Session3: " + req.session.score);
+	}
+	var _score = req.session.score;
+	console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	console.log(_user);
+	console.log(_score);
+	console.log(_level);
+	db.once('updatedUserScore', function(){
+		db.once('updatedTotalScore', function(){
+			res.send();
+		})
+
+		db.updateTotalScore(_user);
+	
+	})
+	db.updateScore(_user, _score, _level);
+});
+
+
+app.post('/advance', function(req, res){
+	var _user = req.session.userid;
+	var _score = req.session.score;
+	var _level = req.body.level;
+
+	console.log(_user);
+	console.log(_score);
+	console.log(_level);
+
+
+	db.once('advance', function(bol){
+
+	if(bol){
+
+	db.once('advance2', function(){
+		res.send();
+	})
+
+	db.advanceLevel(_user, _level);		
+
+
+
+	}else {
+		res.send();
+	}
+	
+	})
+
+	db.advanceLevelCheck(_user, _score, _level);
+
+});
+
+
