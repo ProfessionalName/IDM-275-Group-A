@@ -168,7 +168,10 @@ function getUserScore(){
 
 window.onload = getData();
   
-
+ function getLevel(olt){
+    localStorage.setItem("level", olt);
+  }
+//href="quiz.html"
 
 </script>
 </head>
@@ -192,12 +195,12 @@ window.onload = getData();
 
   <div id="levels">
     <div id="blockHeader">Levels</div>
-    <div class="tab" id = 'tab1'><input type="button" id="level1" value="level 1"></div>
-    <div class="tab" id = 'tab2'><input type="button" id="level2" value="level 2"></div>
-    <div class="tab" id = 'tab3'><input type="button" id="level3" value="level 3"></div>
-    <div class="tab" id = 'tab4'><input type="button" id="level4" value="level 4"></div>
-    <div class="tab" id = 'tab5'><input type="button" id="level5" value="level 5"></div>
-    <div class="tab" id = 'tab6'><input type="button" id="quiz1" value="quiz 1"></div>
+    <a href="quiz.html"  onclick= "getLevel(this.id);" class="tab" id = 'tab1'><input type="button" id="level1" value="level 1"></a>
+    <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab2'><input type="button" id="level2" value="level 2"></a>
+    <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab3'><input type="button" id="level3" value="level 3"></a>
+    <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab4'><input type="button" id="level4" value="level 4"></a>
+    <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab5'><input type="button" id="level5" value="level 5"></a>
+    <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab6'><input type="button" id="quiz1" value="quiz 1"></a>
   </div>
 
   <div id="scoreBoard">

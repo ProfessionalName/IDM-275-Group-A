@@ -61,8 +61,9 @@ class Database extends EventEmitter{
 		}
 
 
-	populateQuestions(){
-		var str = 'Select * from questions';
+	populateQuestions(level){
+		var str = 'Select * from questions where level='+ level + ';';
+		console.log(str);
 		var self = this;
 		con.query(str, function(err, rows, fields){
 			if (err){
