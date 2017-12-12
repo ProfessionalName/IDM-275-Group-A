@@ -31,7 +31,6 @@ function getData(){
           document.getElementById("tab3").innerHTML ="";
           document.getElementById("tab4").innerHTML ="";
           document.getElementById("tab5").innerHTML ="";
-          document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 1){
@@ -39,29 +38,21 @@ function getData(){
           document.getElementById("tab3").innerHTML ="";
           document.getElementById("tab4").innerHTML ="";
           document.getElementById("tab5").innerHTML ="";
-          document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 2){
           document.getElementById("level3").value = "LEVEL 3";
           document.getElementById("tab4").innerHTML ="";
           document.getElementById("tab5").innerHTML ="";
-          document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 3){
           document.getElementById("level4").value = "LEVEL 4";
           document.getElementById("tab5").innerHTML ="";
-          document.getElementById("tab6").innerHTML ="";
         }
 
         if (level == 4){
           document.getElementById("level5").value = "LEVEL 5";
-          document.getElementById("tab6").innerHTML ="";
-        }
-
-        if (level == 5){
-          document.getElementById("quiz1").value = "QUIZ 1";
         }
 
         getWord();
@@ -157,7 +148,11 @@ function getUserScore(){
   });
 }
 
-window.onload = getData();
+// location.reload(true);
+
+// window.onload = getData();
+
+document.onload = getData()
 
 function getLevel(olt){
    localStorage.setItem("level", olt);
@@ -190,7 +185,6 @@ function getLevel(olt){
     <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab3'><input type="button" id="level3" value="level 3"></a>
     <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab4'><input type="button" id="level4" value="level 4"></a>
     <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab5'><input type="button" id="level5" value="level 5"></a>
-    <a href="quiz.html"  onclick= "getLevel(this.id);"  class="tab" id = 'tab6'><input type="button" id="quiz1" value="quiz 1"></a>
   </div>
 
   <div id="scoreBoard">

@@ -312,10 +312,6 @@ class Database extends EventEmitter{
 
 
 	advanceLevel(user, level){
-			// var nextLevel = parseInt(level) + 1;
-			// if (parseInt(level) == 1){
-			// 	nextLevel = 1;
-			// }
 			var _query2 = "Update users set level = " + level + " where username ='" + user + "'";
 			console.log(_query2);
 
@@ -325,6 +321,24 @@ class Database extends EventEmitter{
 			}
 		})
 	}
+
+
+	// checkLevel(user){
+	// 	var _query = "select level from users where username ='" + user + "'";
+	// 	console.log(_query);
+	// 	var self = this;
+
+	// 	con.query(_query, function(err, rows, fields){
+	// 	if (err){
+	// 		console.log("There was an error while advancing level");
+	// 	} else {
+	// 		var toReturn = rows[0].level;
+
+	// 		self.emit('levelCheck', toReturn);
+
+	// 	}
+	// })		
+	// }
 
 
 

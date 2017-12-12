@@ -52,10 +52,22 @@ app.use(bodyParser.json());
 
 app.get('/getData', function (req, res){
 
-	//{username: name , password: pass};
-	var toReturn = {username: req.session.userid, level: req.session.level};
+	//req.session.level
 
-res.send(toReturn);
+	//{username: name , password: pass};
+		// db.once('loggedin', function(msg){
+		// 	console.log("levelCheck")
+		// 	var toReturn = {username: req.session.userid, level: msg};
+
+		// 	res.send(toReturn);
+		// });
+
+		// db.checkLevel(req.session.userid);
+
+		var toReturn = {username: req.session.userid, level: req.session.level};
+
+		res.send(toReturn);
+
 
 });
 
@@ -270,7 +282,10 @@ app.post('/advance', function(req, res){
 		res.send();
 	})
 
-	db.advanceLevel(_user, _level);		
+	console.log("level cache updated")
+
+
+	db.advanceLevel(_user, _level);
 
 
 
