@@ -40,7 +40,7 @@ function getData(){
           document.getElementById("tab5").innerHTML ="";
           document.getElementById("tab6").innerHTML ="";
         }
-        
+
         if (level == 2){
           document.getElementById("level1").value = "LEVEL 1";
           document.getElementById("level2").value = "LEVEL 2";
@@ -48,7 +48,7 @@ function getData(){
           document.getElementById("tab5").innerHTML ="";
           document.getElementById("tab6").innerHTML ="";
         }
-        
+
         if (level == 3){
           document.getElementById("level1").value = "LEVEL 1";
           document.getElementById("level2").value = "LEVEL 2";
@@ -56,7 +56,7 @@ function getData(){
           document.getElementById("tab5").innerHTML ="";
           document.getElementById("tab6").innerHTML ="";
         }
-        
+
         if (level == 4){
           document.getElementById("level1").value = "LEVEL 1";
           document.getElementById("level2").value = "LEVEL 2";
@@ -64,7 +64,7 @@ function getData(){
           document.getElementById("level4").value = "LEVEL 4";
           document.getElementById("tab6").innerHTML ="";
         }
-        
+
         if (level == 5){
           document.getElementById("level1").value = "LEVEL 1";
           document.getElementById("level2").value = "LEVEL 2";
@@ -131,7 +131,7 @@ function getScoreboard(){
           _table += "<tr>";
           _table += "<td>" + msg[i].Rank + "</td>";
           _table += "<td>" + msg[i].Username + "</td>";
-          _table += "<td>" + msg[i].Score + "</td>";  
+          _table += "<td>" + msg[i].Score + "</td>";
           _table += "</tr>";
         }
         _table += "</tbody>";
@@ -143,7 +143,7 @@ function getScoreboard(){
       error: function(){
         console.log("Error while displaying the scoreboard!");
       }
-  });  
+  });
 }
 
 function getUserScore(){
@@ -163,11 +163,11 @@ function getUserScore(){
       error: function(){
         console.log("Error while getting user score!");
       }
-  }); 
+  });
 }
 
 window.onload = getData();
-  
+
 
 
 </script>
@@ -214,7 +214,7 @@ Insert Stuff About Copyright Here
 <div>
 
 <div id="nav">
-  <input type="button" name="Logout" onclick="logout()">
+  <input type="button" name="Logout" onclick="logout()" value="Logout">
 </div>
 
 </body>

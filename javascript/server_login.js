@@ -15,7 +15,7 @@ var unirest = require('unirest');
 
 app.use(session({
 	cookieName: 'session',
-	secret: 'asdfasdf23423', 
+	secret: 'asdfasdf23423',
 	duration: 30 * 60 * 1000,
 	activeDuration: 5 * 60 * 1000,
 }));
@@ -86,7 +86,7 @@ app.post('/signup', function(req,res){
 	console.log(username);
 	var password = req.body.password;
 	console.log(password);
-	
+
 	db.signup(username, password);
 });
 
@@ -106,7 +106,7 @@ app.post('/login', function (req, res){
 		res.send('login failed')
 		}
 		});
-		
+
 	db.login(username, password, req);
 
 	});
@@ -153,7 +153,7 @@ app.post('/updateQuestion', function(req, res){
 	db.updateQuestion(question);
 });
 
-<<<<<<< HEAD
+
 app.get('/populateQuestions', function(req, res){
 	console.log("Connected");
 	db.once('questionsTable', function(rows){
@@ -168,14 +168,14 @@ app.get('/populateQuestions', function(req, res){
 				option5: rows[i].answer
 			});
 		};
-		
+
 		res.send(Questions);
 		console.log(Questions);
 	});
 	db.populateQuestions();
 
 })
-=======
+
 app.get('/getWord', function(req, res){
 	db.once('gotWord', function(msg){
 		console.log(msg);
@@ -213,4 +213,3 @@ app.get('/getUserScore', function(req, res){
 	})
 	db.getUserScore(_user);
 });
->>>>>>> 72d428c797f948ade7b187ce446ce4f883033925

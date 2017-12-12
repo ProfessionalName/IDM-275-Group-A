@@ -56,7 +56,7 @@ function login(){
 function signup(){
 	var name = document.getElementById("username").value;
 	var pass = document.getElementById("password").value;
-	var URL = "http://localhost:8080/signup";	
+	var URL = "http://localhost:8080/signup";
 	var params = {username: name , password: pass};
 
 	$.ajax({
@@ -86,7 +86,7 @@ function signup(){
 <!-- Nav for links and login/username display-->
 <div id="nav">
   <a href="index.html" id ="leftLink">Home</a>
-  <input type="button" name="Login"	onclick="contentControl('http://localhost:8080/loginrender')">
+  <input type="button" name="Login"	id="login" value="Login" onclick="contentControl('http://localhost:8080/loginrender')">
 </div>
 
 <!-- Contant -->

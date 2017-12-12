@@ -20,8 +20,12 @@
   float:left;
 }
 
-#rightLink {
+#login{
   float: right;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 #footer {
@@ -61,6 +65,8 @@ body {
  padding: 0px;
 }
 
+
+
 /* For game */
 
 #contain {
@@ -75,7 +81,8 @@ body {
 }
 
 #question {
-  background-color: red;
+  background-color: black;
+  color: white;
   width: 60%;
   height: 100%;
   float: left;
@@ -86,7 +93,7 @@ body {
 }
 
 #choiceA {
-  background-color: blue;
+  background-color: #fff;
   width: 40%;
   height: 25%;
   float: left;
@@ -94,10 +101,16 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 150%;
+}
+
+#choiceA:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 #choiceB {
-  background-color: yellow;
+  background-color: #ddd;
   width: 40%;
   height: 25%;
   float: left;
@@ -105,10 +118,16 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 150%;
+}
+
+#choiceB:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 #choiceC {
-  background-color: green;
+  background-color: #ccc;
   width: 40%;
   height: 25%;
   float: left;
@@ -118,8 +137,14 @@ body {
   font-size: 150%;
 }
 
+#choiceC:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
 #choiceD {
-  background-color: orange;
+  background-color: #bbb;
   width: 40%;
   height: 25%;
   float: left;
@@ -127,6 +152,18 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 150%;
+}
+
+#choiceD:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+#update{
+  font-size: 20px;
+  margin-top: 24%;
+  margin-right: 5%;
 }
 
 /* For userpage */
@@ -142,11 +179,12 @@ body {
 }
 
 #wordOfDay{
-  background-color: #697A85;
+  background-color: #ccc;
   width: 30%;
   margin: 20px;
   float: left;
   height: 150px;
+  border: 1px solid black;
 }
 
 #scoreBoardTable{
@@ -161,15 +199,17 @@ body {
 }
 
 #scoreBoard{
-  background-color: yellow;
+  background-color:#ccc;
   width: 30%;
   margin: 20px;
   float: left;
   height:250px;
+  border: 1px solid black;
 }
 
 #blockHeader{
-  background-color: green;
+  background-color: black;
+  color: white;
   font-size: 150%;
 }
 
@@ -181,7 +221,7 @@ body {
 .tab{
   border: 1px solid black;
   font-size: 125%;
-  background-color: grey;
+  background-color: #ccc;
 }
 
 #wordOfDay #_word{

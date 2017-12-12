@@ -12,26 +12,26 @@
 <script type="text/javascript">
 
     var question, word1, word2, word3, word4, answer;
-	var jsonObj= { Question: question, 
+	var jsonObj= { Question: question,
 					option1: word1,
-					option2: word2, 
-					option3: word3, 
-					option4: word4, 
-					option5: answer 
-				}; 
-	
+					option2: word2,
+					option3: word3,
+					option4: word4,
+					option5: answer
+				};
+
 	var correctAnswer;
 	var questionNumber = 1;
 
 function PopulateQuestion(){
-      
+
 	$.ajax({
          type: "GET",
          url: "http://localhost:8080/populateQuestions",
          contentType: "application/json",
          data: jsonObj,
          success: function(msg){
-         	
+
 			for(i=0; i<questionNumber; i++){
         	$('#question').text(msg[i].Question);
         	$('#choiceA').text(msg[i].option1);
@@ -43,7 +43,7 @@ function PopulateQuestion(){
 		},
 		error: function(xhr, ajaxOptions, thrownError){
 			alert('Connection to server failed!');
-		}          
+		}
       });
 }
 
@@ -72,7 +72,7 @@ function updateQuestion(){
 window.onload=PopulateQuestion();
 
 
-//		  
+//
 	</script>
 
 <body>
@@ -80,7 +80,6 @@ window.onload=PopulateQuestion();
 <!-- Nav for links and login/username display-->
 <div id="nav">
   <a href="index.html" id ="leftLink">Home</a>
-  <a href="login.html" id ="rightLink">Login</a>
 </div>
 
 <!-- Content -->
