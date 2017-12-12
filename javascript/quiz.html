@@ -11,7 +11,6 @@
 
 <script type="text/javascript">
 
-<<<<<<< HEAD
     var question, word1, word2, word3, word4, answer;
 	var jsonObj= { Question: question,
 					option1: word1,
@@ -20,30 +19,12 @@
 					option4: word4,
 					option5: answer
 				};
-
-=======
-
-    var question, word1, word2, word3, word4, answer, level;
-	var jsonObj= { Question: question, 
-					option1: word1,
-					option2: word2, 
-					option3: word3, 
-					option4: word4, 
-					option5: answer,
-					levels: level, 
-				}; 
-	
->>>>>>> e4d900c781a84fc1c11600a5a4f1c92da5b87aca
 	var correctAnswer;
 	var questionNumber = 1;
 
 
 
 function PopulateQuestion(){
-<<<<<<< HEAD
-
-=======
->>>>>>> e4d900c781a84fc1c11600a5a4f1c92da5b87aca
 	$.ajax({
          type: "GET",
          url: "http://localhost:8080/populateQuestions?level=" + level,
@@ -72,8 +53,10 @@ function checkAnswer(elt){
 	var user_choice = elt.innerHTML;
 	if(correctAnswer != user_choice){
 		window.alert("Wrong!");
+		updateQuestion()
 	}else {
 		window.alert("Correct! Proceed to the next Question!");
+		updateQuestion()
 	}
 }
 
@@ -94,7 +77,6 @@ function getLevel(){
 }
 
 //function check
-//window.onload=PopulateQuestion();
 window.onload=getLevel();
 
 

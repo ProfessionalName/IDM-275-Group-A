@@ -215,7 +215,3 @@ app.get('/getUserScore', function(req, res){
 	})
 	db.getUserScore(_user);
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> e4d900c781a84fc1c11600a5a4f1c92da5b87aca
