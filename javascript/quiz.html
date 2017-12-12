@@ -44,7 +44,7 @@ function PopulateQuestion(){
         } else {
         	checkAdvancment();
         	resetScore();
-        	window.location.href = "http://localhost:8080/user.html";	
+        	window.location.href = "http://localhost:8080/user.html";
         }
 		},
 		error: function(xhr, ajaxOptions, thrownError){
@@ -168,14 +168,16 @@ window.onload=getLevel();
 <button onclick= "updateQuestion()" id= "update" style="float: right;">NEXT!</button>
 
 
-<div id="nav">
-  <input type="button" name="Logout" onclick="logout()" value="Logout">
-</div>
+
 
 <!-- Footer -->
 <div id="footer">
 CS-275 Final
 <div>
+
+  <div id="nav">
+    <input type="button" name="Logout" onclick="logout()" value="Logout">
+  </div>
 
 </body>
 </html>
